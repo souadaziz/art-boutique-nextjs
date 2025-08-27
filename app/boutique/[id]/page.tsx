@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -128,10 +127,6 @@ export default function ArtworkDetailPage() {
                   <p className="font-medium">{artwork.technique}</p>
                 </div>
                 <div>
-                  <span className="text-gray-500">Année:</span>
-                  <p className="font-medium">{artwork.year}</p>
-                </div>
-                <div>
                   <span className="text-gray-500">Artiste:</span>
                   <p className="font-medium">{artwork.artist}</p>
                 </div>
@@ -191,8 +186,8 @@ export default function ArtworkDetailPage() {
 
             {/* Additional Info */}
             <div className="text-sm text-gray-500 space-y-2">
-              <p>✓ Livraison gratuite au Maroc</p>
-              <p>✓ Retour possible sous 14 jours</p>
+              <p>✓ Livraison au Maroc: Gratuite</p>
+              <p>✓ Livraison Partout dans le monde: Contactez-nous </p>
               <p>✓ Certificat d'authenticité inclus</p>
             </div>
           </div>

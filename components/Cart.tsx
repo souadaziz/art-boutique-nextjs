@@ -4,6 +4,7 @@ import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { X, Plus, Minus, ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 
 interface CartProps {
@@ -13,6 +14,7 @@ interface CartProps {
 
 export default function Cart({ isOpen, onClose }: CartProps) {
   const { items, updateQuantity, removeFromCart, total, itemCount } = useCart();
+  const router = useRouter();
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -144,8 +146,8 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                           <button
                             className="flex w-full items-center justify-center rounded-md border border-transparent bg-primary-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-primary-700 transition-colors duration-200"
                             onClick={() => {
-                              // TODO: Implement checkout functionality
-                              alert('Fonctionnalité de commande à venir !');
+                              onClose();
+                              router.push('/commande');
                             }}
                           >
                             Commander

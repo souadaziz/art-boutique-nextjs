@@ -48,11 +48,6 @@ export default function ContactPage() {
       title: 'Email',
       details: ['souadazizart@gamil.com', 'souad0110@gmail.com']
     },
-    {
-      icon: Clock,
-      title: 'Horaires',
-      details: ['Lun-Ven: 10h-19h', 'Sam: 10h-18h', 'Dim: Fermé']
-    }
   ];
 
   return (
@@ -95,17 +90,6 @@ export default function ContactPage() {
               ))}
             </div>
 
-            {/* Map Placeholder */}
-            <div className="mt-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Notre Localisation</h3>
-              <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-2" />
-                  <p className="text-gray-500">Carte interactive</p>
-                  <p className="text-sm text-gray-400">123 Rue de l'Art, 75001 Paris</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Contact Form */}
@@ -180,7 +164,7 @@ export default function ContactPage() {
                     <option value="">Sélectionnez un sujet</option>
                     <option value="information">Demande d'information</option>
                     <option value="achat">Question sur un achat</option>
-                    <option value="livraison">Livraison et retours</option>
+                    <option value="livraison">Livraison</option>
                     <option value="artiste">Collaboration artiste</option>
                     <option value="autre">Autre</option>
                   </select>
@@ -224,50 +208,6 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* FAQ Section */}
-        <section className="mt-20">
-          <h2 className="text-3xl font-display font-bold text-gray-900 mb-8 text-center">
-            Questions Fréquentes
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                Comment puis-je être sûr de l'authenticité des œuvres ?
-              </h3>
-              <p className="text-gray-600">
-                Chaque œuvre est accompagnée d'un certificat d'authenticité signé et cacheté par l'artiste Souad AZIZ. 
-                
-              </p>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                Quels sont les délais de livraison ?
-              </h3>
-              <p className="text-gray-600">
-                La livraison standard dans tout le Maroc prend 3-5 jours ouvrés. 
-                Pour les œuvres fragiles, nous utilisons un service de transport spécialisé.
-              </p>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                Puis-je retourner une œuvre si elle ne me convient pas ?
-              </h3>
-              <p className="text-gray-600">
-                Vous disposez de 14 jours pour retourner une œuvre en parfait état. 
-                Les frais de retour sont à votre charge sauf en cas de défaut.
-              </p>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                Proposez-vous des conseils pour l'encadrement ?
-              </h3>
-              <p className="text-gray-600">
-                Oui, notre équipe peut vous conseiller sur l'encadrement et la mise en valeur 
-                de votre œuvre selon votre intérieur et vos préférences.
-              </p>
-            </div>
-          </div>
-        </section>
       </div>
     </div>
   );

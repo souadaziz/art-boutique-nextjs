@@ -3,33 +3,7 @@ import Link from 'next/link';
 import { Award, Heart, Palette, Users } from 'lucide-react';
 
 export default function AboutPage() {
-  const stats = [
-    { label: 'Œuvres vendues', value: '500+', icon: Award },
-    { label: 'Artistes partenaires', value: '50+', icon: Users },
-    { label: 'Années d\'expérience', value: '15+', icon: Heart },
-    { label: 'Techniques maîtrisées', value: '20+', icon: Palette },
-  ];
 
-  const team = [
-    {
-      name: 'Marie Dubois',
-      role: 'Fondatrice & Curatrice',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
-      description: 'Passionnée d\'art depuis l\'enfance, Marie a créé cette boutique pour partager sa vision unique de l\'art contemporain.'
-    },
-    {
-      name: 'Pierre Martin',
-      role: 'Expert en Art Classique',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
-      description: 'Historien de l\'art diplômé, Pierre apporte son expertise pour authentifier et présenter nos œuvres classiques.'
-    },
-    {
-      name: 'Sophie Laurent',
-      role: 'Responsable Relations Artistes',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
-      description: 'Sophie découvre et accompagne les artistes émergents, créant des ponts entre créateurs et collectionneurs.'
-    }
-  ];
 
   return (
     <div className="min-h-screen">
@@ -39,11 +13,13 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-6">
-                Notre Passion pour l'Art
+                A propos
               </h1>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Depuis plus de 15 ans, nous sélectionnons avec passion les plus belles œuvres d'art 
-                pour enrichir votre quotidien et sublimer vos espaces de vie.
+              <p className="text-1xl text-gray-600 mb-8 leading-relaxed">
+              Souad Aziz est née au cœur des montagnes du Moyen Atlas au Maroc, connues par leur beauté naturelle et leur richesse culturelle, ce qui lui a permis, de façon innée, d'avoir un lien fort avec la nature et ses composantes dans son contexte artistique, émotionnel et spirituel.
+              </p>
+              <p className="text-1xl text-gray-600 mb-8 leading-relaxed">
+              Malgré son cursus scolaire scientifique Intense finissant par un parcours professionnel en Ingénierie, elle a su garder ce lien profond avec la nature. Après la pandémie, elle a repris contact avec sa passion d'enfance lui permettant de s'exprimer, créer et de partager avec vous son art et son expérience artistique.
               </p>
               <Link
                 href="/boutique"
@@ -55,8 +31,8 @@ export default function AboutPage() {
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-                  alt="Galerie d'art"
+                  src="/images/souad-aziz-portrait.jpg"
+                  alt="Souad Aziz - Artiste"
                   fill
                   className="object-cover"
                 />
@@ -66,83 +42,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 rounded-full mb-4">
-                  <stat.icon className="h-8 w-8 text-primary-600" />
-                </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
-                <div className="text-gray-600">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Story Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-6">
-              Notre Histoire
-            </h2>
-          </div>
-          <div className="prose prose-lg mx-auto text-gray-600">
-            <p>
-              Tout a commencé en 2008, lorsque Marie Dubois, jeune diplômée en histoire de l'art, 
-              a ouvert sa première galerie dans le quartier artistique de Montmartre. Sa vision était simple : 
-              rendre l'art accessible à tous, en créant un pont entre les artistes talentueux et les amateurs d'art.
-            </p>
-            <p>
-              Au fil des années, notre boutique s'est développée, accueillant des œuvres d'artistes émergents 
-              comme confirmés. Nous avons tissé des liens privilégiés avec une communauté d'artistes passionnés, 
-              chacun apportant sa sensibilité unique à notre collection.
-            </p>
-            <p>
-              Aujourd'hui, nous sommes fiers de proposer une sélection éclectique d'œuvres d'art, 
-              allant de la peinture contemporaine à la sculpture classique, en passant par la photographie 
-              et les créations numériques. Chaque pièce est choisie avec soin pour sa qualité artistique 
-              et son potentiel émotionnel.
-            </p>
-          </div>
-        </div>
-      </section>
 
-      {/* Team Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-6">
-              Notre Équipe
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Une équipe passionnée d'experts en art, dédiée à vous accompagner 
-              dans votre découverte artistique.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <div key={index} className="text-center">
-                <div className="relative w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden shadow-lg">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h3>
-                <p className="text-primary-600 font-medium mb-4">{member.role}</p>
-                <p className="text-gray-600 leading-relaxed">{member.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Values Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-primary-600">
@@ -157,8 +58,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl font-semibold text-white mb-3">Passion</h3>
               <p className="text-primary-100">
-                Nous sélectionnons chaque œuvre avec amour et expertise, 
-                guidés par notre passion pour l'art authentique.
+                Chaque œuvre est réalisée avec beaucoup d'amour, et chaque commande est née d'un profond échange et écoute de vos besoins.
               </p>
             </div>
             <div className="text-center">
@@ -167,15 +67,14 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl font-semibold text-white mb-3">Qualité</h3>
               <p className="text-primary-100">
-                Nous garantissons l'authenticité et la qualité de chaque œuvre, 
-                avec certificat d'authenticité inclus.
+                L'authenticité et la qualité de chaque œuvre est garantie, avec un certificat d'authenticité inclus.
               </p>
             </div>
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-white bg-opacity-20 rounded-full mb-4">
                 <Users className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">Proximité</h3>
+              <h3 className="text-xl font-semibold text-white mb-3">Proximité et partage</h3>
               <p className="text-primary-100">
                 Nous accompagnons nos clients dans leur découverte artistique 
                 avec des conseils personnalisés.
@@ -192,7 +91,9 @@ export default function AboutPage() {
             Prêt à Découvrir l'Art ?
           </h2>
           <p className="text-lg text-gray-600 mb-8">
-            Explorez notre collection unique et trouvez l'œuvre qui parlera à votre cœur.
+          Explorez ma collection et trouvez l'œuvre qui parlera à votre cœur, 
+          si vous n'êtes pas sûr de quel tableau acheter, ou si vous voulez passez une commande personnalisée, 
+          laissez moi un message, j'aimerai bien échanger avec vous.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

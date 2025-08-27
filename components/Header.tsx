@@ -17,6 +17,7 @@ export default function Header({ onCartClick }: HeaderProps) {
   const navigation = [
     { name: 'Accueil', href: '/' },
     { name: 'Galerie', href: '/boutique' },
+    { name: 'Art sur mesure', href: '/art-sur-mesure' },
     { name: 'À Propos', href: '/a-propos' },
     { name: 'Contact', href: '/contact' },
   ];

@@ -55,13 +55,10 @@ export default function HomePage() {
                 L'Art qui Inspire
               </h2>
               <p className="text-lg text-gray-600 mb-6">
-                Notre galerie d'art présente une collection unique d'œuvres contemporaines 
-                et classiques, soigneusement sélectionnées pour leur qualité artistique 
-                et leur capacité à émouvoir.
+              Mon art représente la connexion profonde avec les éléments de la nature, où se rencontrent la matière, la lumière et les mouvements pour créer un sens, une émotion.
               </p>
               <p className="text-lg text-gray-600 mb-8">
-                Chaque pièce raconte une histoire, exprime une émotion et apporte 
-                une dimension artistique à votre espace de vie.
+              Chaque œuvre vous invite à expérimenter un moment de connexion, et apporte la sérénité et la chaleur à votre Intérieur.
               </p>
               <Link
                 href="/a-propos"

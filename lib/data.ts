@@ -12,6 +12,7 @@ export const artworks: Artwork[] = [
     dimensions: '60 x 80 cm',
     technique: 'Acrylique sur toile',
     available: true,
+    year: 2024,
   },
   {
     id: '2',
@@ -24,6 +25,7 @@ export const artworks: Artwork[] = [
     dimensions: '50 x 70 cm',
     technique: 'Huile sur toile',
     available: true,
+    year: 2024,
   },
   {
     id: '3',
@@ -36,6 +38,7 @@ export const artworks: Artwork[] = [
     dimensions: '40 x 50 cm',
     technique: 'Aquarelle',
     available: true,
+    year: 2023,
   },
   {
     id: '4',
@@ -48,6 +51,7 @@ export const artworks: Artwork[] = [
     dimensions: '70 x 100 cm',
     technique: 'Technique mixte',
     available: true,
+    year: 2024,
   },
   {
     id: '5',
@@ -60,6 +64,7 @@ export const artworks: Artwork[] = [
     dimensions: '80 x 80 cm',
     technique: 'Acrylique sur toile',
     available: true,
+    year: 2023,
   },
   {
     id: '6',
@@ -72,6 +77,7 @@ export const artworks: Artwork[] = [
     dimensions: '50 x 60 cm',
     technique: 'Huile sur toile',
     available: true,
+    year: 2024,
   },
   {
     id: '7',
@@ -84,6 +90,7 @@ export const artworks: Artwork[] = [
     dimensions: '65 x 85 cm',
     technique: 'Acrylique sur toile',
     available: false,
+    year: 2023,
   },
 ];
 

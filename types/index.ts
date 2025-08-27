@@ -9,6 +9,7 @@ export interface Artwork {
   dimensions: string;
   technique: string;
   available: boolean;
+  year: number;
 }
 
 export interface CartItem {
