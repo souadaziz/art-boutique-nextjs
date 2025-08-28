@@ -18,6 +18,7 @@ export default function Header({ onCartClick }: HeaderProps) {
     { name: 'Accueil', href: '/' },
     { name: 'Galerie', href: '/boutique' },
     { name: 'Art sur mesure', href: '/art-sur-mesure' },
+    { name: 'Workshop', href: '/workshop' },
     { name: 'À Propos', href: '/a-propos' },
     { name: 'Contact', href: '/contact' },
   ];

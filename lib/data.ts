@@ -7,6 +7,11 @@ export const artworks: Artwork[] = [
     artist: 'Souad Aziz',
     price: 4750,
     image: '/images/artworks/IMG-20250825-WA0008.jpg',
+    images: [
+      '/images/artworks/IMG-20250825-WA0008.jpg',
+      '/images/artworks/IMG-20250825-WA0008-2.jpg',
+      '/images/artworks/IMG-20250825-WA0008-3.jpg'
+    ],
     description: 'Une œuvre vibrante capturant l\'essence d\'un coucher de soleil à travers des formes abstraites et des couleurs chaudes.',
     category: 'Abstrait',
     dimensions: '60 x 80 cm',
@@ -20,6 +25,10 @@ export const artworks: Artwork[] = [
     artist: 'Souad Aziz',
     price: 3360,
     image: '/images/artworks/IMG-20250825-WA0007.jpg',
+    images: [
+      '/images/artworks/IMG-20250825-WA0007.jpg',
+      '/images/artworks/IMG-20250825-WA0007-2.jpg'
+    ],
     description: 'Un paysage serein des montagnes de l\'Atlas, peint avec une technique impressionniste moderne.',
     category: 'Paysage',
     dimensions: '50 x 70 cm',
@@ -33,6 +42,12 @@ export const artworks: Artwork[] = [
     artist: 'Souad Aziz',
     price: 2940,
     image: '/images/artworks/IMG-20250825-WA0006.jpg',
+    images: [
+      '/images/artworks/IMG-20250825-WA0006.jpg',
+      '/images/artworks/IMG-20250825-WA0006-2.jpg',
+      '/images/artworks/IMG-20250825-WA0006-3.jpg',
+      '/images/artworks/IMG-20250825-WA0006-4.jpg'
+    ],
     description: 'Une composition délicate de fleurs du désert marocain, aux couleurs vives et contrastées.',
     category: 'Nature',
     dimensions: '40 x 50 cm',
@@ -46,6 +61,13 @@ export const artworks: Artwork[] = [
     artist: 'Souad Aziz',
     price: 6090,
     image: '/images/artworks/IMG-20250825-WA0005.jpg',
+    images: [
+      '/images/artworks/IMG-20250825-WA0005.jpg',
+      '/images/artworks/IMG-20250825-WA0005-2.jpg',
+      '/images/artworks/IMG-20250825-WA0005-3.jpg',
+      '/images/artworks/IMG-20250825-WA0005-4.jpg',
+      '/images/artworks/IMG-20250825-WA0005-5.jpg'
+    ],
     description: 'Les ruelles illuminées de la médina de Marrakech, capturées dans une ambiance mystérieuse.',
     category: 'Urbain',
     dimensions: '70 x 100 cm',
@@ -59,6 +81,11 @@ export const artworks: Artwork[] = [
     artist: 'Souad Aziz',
     price: 4410,
     image: '/images/artworks/IMG-20250825-WA0004.jpg',
+    images: [
+      '/images/artworks/IMG-20250825-WA0004.jpg',
+      '/images/artworks/IMG-20250825-WA0004-2.jpg',
+      '/images/artworks/IMG-20250825-WA0004-3.jpg'
+    ],
     description: 'Une explosion de couleurs vives qui évoque la joie et le mouvement de la danse traditionnelle.',
     category: 'Abstrait',
     dimensions: '80 x 80 cm',
@@ -72,6 +99,10 @@ export const artworks: Artwork[] = [
     artist: 'Souad Aziz',
     price: 3990,
     image: '/images/artworks/IMG-20250825-WA0003.jpg',
+    images: [
+      '/images/artworks/IMG-20250825-WA0003.jpg',
+      '/images/artworks/IMG-20250825-WA0003-2.jpg'
+    ],
     description: 'Un portrait expressif célébrant la beauté et la dignité de la culture berbère.',
     category: 'Portrait',
     dimensions: '50 x 60 cm',
@@ -84,7 +115,10 @@ export const artworks: Artwork[] = [
     title: 'Jardin Andalou',
     artist: 'Souad Aziz',
     price: 5460,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg', // Exemple avec image locale
+    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    images: [
+      '/images/artworks/IMG-20250825-WA0002.jpg'
+    ],
     description: 'Un jardin luxuriant inspiré des patios andalous, avec ses fontaines et sa végétation exotique.',
     category: 'Nature',
     dimensions: '65 x 85 cm',

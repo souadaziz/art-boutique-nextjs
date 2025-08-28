@@ -3,7 +3,8 @@ export interface Artwork {
   title: string;
   artist: string;
   price: number;
-  image: string;
+  image: string; // Image principale pour la galerie
+  images: string[]; // Toutes les images (1-5) pour le carousel
   description: string;
   category: string;
   dimensions: string;

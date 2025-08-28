@@ -7,6 +7,7 @@ import { ArrowLeft, ShoppingCart, Heart, Share2, Minus, Plus } from 'lucide-reac
 import { artworks } from '@/lib/data';
 import { useCart } from '@/lib/cart-context';
 import ArtworkCard from '@/components/ArtworkCard';
+import ImageCarousel from '@/components/ImageCarousel';
 
 export default function ArtworkDetailPage() {
   const params = useParams();
@@ -76,16 +77,11 @@ export default function ArtworkDetailPage() {
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Image */}
-          <div className="aspect-square relative overflow-hidden rounded-2xl shadow-2xl">
-            <Image
-              src={artwork.image}
-              alt={artwork.title}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+          {/* Image Carousel */}
+          <ImageCarousel 
+            images={artwork.images} 
+            title={artwork.title} 
+          />
 
           {/* Details */}
           <div className="flex flex-col">
@@ -96,7 +92,7 @@ export default function ArtworkDetailPage() {
               <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mt-2 mb-4">
                 {artwork.title}
               </h1>
-              <p className="text-2xl font-semibold text-gray-900 mb-4">
+              <p className={`text-2xl font-semibold mb-4 ${artwork.available ? 'text-gray-900' : 'text-gray-500 line-through'}`}>
                 {artwork.price} MAD
               </p>
               
