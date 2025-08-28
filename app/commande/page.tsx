@@ -40,44 +40,36 @@ export default function CommandePage() {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simuler l'envoi de la commande
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // Envoyer les données à l'API
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'commande',
+          ...formData,
+          items,
+          total
+        }),
+      });
 
-    // Préparer le message de commande
-    const commandeDetails = items.map(item => 
-      `- ${item.artwork.title} (${item.quantity}x) - ${item.artwork.price * item.quantity} MAD`
-    ).join('\n');
+      if (!response.ok) {
+        throw new Error('Erreur lors de l\'envoi de la commande');
+      }
 
-    const messageComplet = `
-Nouvelle commande:
+      const result = await response.json();
+      console.log('Email envoyé:', result);
 
-DÉTAILS CLIENT:
-Nom: ${formData.nom}
-Email: ${formData.email}
-Téléphone: ${formData.telephone}
-Adresse: ${formData.adresse}
-Ville: ${formData.ville}
-Code Postal: ${formData.codePostal}
-Pays: ${formData.pays}
-
-ŒUVRES COMMANDÉES:
-${commandeDetails}
-
-TOTAL: ${total} MAD
-
-MESSAGE CLIENT:
-${formData.message}
-    `;
-
-    // Créer le lien mailto
-    const mailtoLink = `mailto:contact@souadaziz.com?subject=Nouvelle commande - ${total} MAD&body=${encodeURIComponent(messageComplet)}`;
-    
-    // Ouvrir le client email
-    window.location.href = mailtoLink;
-
-    setIsSubmitted(true);
-    clearCart();
-    setIsLoading(false);
+      setIsSubmitted(true);
+      clearCart();
+    } catch (error) {
+      console.error('Erreur:', error);
+      alert('Une erreur est survenue lors de l\'envoi de votre commande. Veuillez réessayer.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (isSubmitted) {
