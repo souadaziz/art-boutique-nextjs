@@ -30,10 +30,10 @@ export default function Header({ onCartClick }: HeaderProps) {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
             <Image
-              src="/logo/LOGO.jpg"
+              src="/logo/LOG.png"
               alt="SouadAzizArt Logo"
-              width={80}
-              height={80}
+              width={70}
+              height={70}
               className="object-contain"
             />
             <div className="flex flex-col leading-none items-center">

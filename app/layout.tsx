@@ -29,6 +29,19 @@ export const metadata: Metadata = {
   title: 'SouadAzizArt - Galerie d\'Art Contemporain',
   description: 'Découvrez la collection unique d\'œuvres d\'art originales de l\'artiste Souad Aziz. Peintures et créations artistiques exceptionnelles.',
   keywords: 'art, galerie, peinture, sculpture, œuvres d\'art, galerie, contemporain',
+  icons: [
+    {
+      rel: 'icon',
+      url: '/logo/LOG.png',
+      sizes: '32x32',
+      type: 'image/png',
+    },
+    {
+      rel: 'shortcut icon',
+      url: '/logo/LOG.png',
+      type: 'image/png',
+    },
+  ],
 };
 
 export default function RootLayout({
