@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
 
     // Envoyer l'email via Resend
     const { data, error } = await resend.emails.send({
-      from: 'Art Boutique <onboarding@resend.dev>', // Domaine par défaut pour les tests
+      from: 'Souad Aziz Art <contact@souadazizart.com>', // Domaine par défaut pour les tests
       to: [toEmail],
       subject: subject,
       html: htmlContent,
