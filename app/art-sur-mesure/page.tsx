@@ -52,7 +52,7 @@ export default function ArtSurMesurePage() {
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                  src="/images/art-sur-mesure.jpg"
                   alt="Création artistique sur mesure"
                   fill
                   className="object-cover"

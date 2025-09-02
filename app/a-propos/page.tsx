@@ -1,9 +1,47 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { Award, Heart, Palette, Users } from 'lucide-react';
+import { Award, Heart, Palette, Users, ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { useState } from 'react';
 
 export default function AboutPage() {
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
+  const testimonials = [
+    {
+      name: "Marie Dubois",
+      role: "Collectionneuse",
+      content: "Les œuvres de Souad sont d'une beauté exceptionnelle. Chaque tableau raconte une histoire unique et apporte une énergie positive à mon salon.",
+      rating: 5
+    },
+    {
+      name: "Ahmed Benali",
+      role: "Client workshop",
+      content: "Le workshop m'a permis de découvrir ma créativité. L'approche de Souad est bienveillante et inspirante. Je recommande vivement !",
+      rating: 5
+    },
+    {
+      name: "Sophie Martin",
+      role: "Commande personnalisée",
+      content: "Souad a créé une œuvre sur mesure qui dépasse toutes mes attentes. Son écoute et sa créativité sont remarquables.",
+      rating: 5
+    },
+    {
+      name: "Youssef Alami",
+      role: "Étudiant formation",
+      content: "Les formations en ligne sont excellentes. J'ai appris énormément et je continue à progresser grâce aux conseils de Souad.",
+      rating: 5
+    }
+  ];
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
 
   return (
     <div className="min-h-screen">
@@ -80,6 +118,71 @@ export default function AboutPage() {
                 avec des conseils personnalisés.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-6">
+              Témoignages
+            </h2>
+            <p className="text-lg text-gray-600">
+              Découvrez ce que nos clients disent de leur expérience avec nos œuvres et formations
+            </p>
+          </div>
+          
+          <div className="relative bg-gray-50 rounded-2xl p-8 md:p-12">
+            <div className="text-center">
+              <div className="flex justify-center mb-4">
+                {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
+                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              
+              <blockquote className="text-xl md:text-2xl text-gray-700 mb-6 leading-relaxed">
+                "{testimonials[currentTestimonial].content}"
+              </blockquote>
+              
+              <div className="text-center">
+                <div className="font-semibold text-gray-900 text-lg">
+                  {testimonials[currentTestimonial].name}
+                </div>
+                <div className="text-primary-600 font-medium">
+                  {testimonials[currentTestimonial].role}
+                </div>
+              </div>
+            </div>
+            
+            {/* Navigation buttons */}
+            <button
+              onClick={prevTestimonial}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow duration-200"
+            >
+              <ChevronLeft className="h-6 w-6 text-gray-600" />
+            </button>
+            
+            <button
+              onClick={nextTestimonial}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow duration-200"
+            >
+              <ChevronRight className="h-6 w-6 text-gray-600" />
+            </button>
+          </div>
+          
+          {/* Dots indicator */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentTestimonial(index)}
+                className={`w-3 h-3 rounded-full transition-colors duration-200 ${
+                  index === currentTestimonial ? 'bg-primary-600' : 'bg-gray-300'
+                }`}
+              />
+            ))}
           </div>
         </div>
       </section>

@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Palette, Monitor, Clock, Award, Brush, Heart, Video, Download, MessageSquare, Wifi } from 'lucide-react';
@@ -35,13 +37,6 @@ export default function WorkshopPage() {
       includes: ['4 sessions live de 2h', 'Replays à vie', 'Liste matériel PDF', 'Groupe WhatsApp privé']
     },
     {
-      title: 'Masterclass Avancée',
-      duration: '6 semaines',
-      price: '1490 MAD',
-      description: 'Perfectionnez vos techniques avec des projets avancés et un suivi personnalisé.',
-      includes: ['6 sessions live de 2h30', 'Critiques individuelles', 'Ressources bonus', 'Certificat numérique']
-    },
-    {
       title: 'Coaching Privé',
       duration: 'Flexible',
       price: 'À partir de 750 MAD/h',
@@ -58,36 +53,38 @@ export default function WorkshopPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-6">
-                Formations Peinture en Ligne
+                WORKSHOP
               </h1>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Apprenez la peinture depuis le confort de votre foyer ! Nos formations en ligne 
-                vous offrent un apprentissage flexible et interactif avec une artiste professionnelle.
+                Bienvenue à mon workshop artistique, où vous pouvez apprendre à créer votre propre tableau d'art intuitif. 
+                En profitant de mes conseils et suivant les étapes de mon process de travail, 
+                Ce workshop plein d'échange et de partage vous offre un espace d'expression et d'expérimentation, 
+                vous allez apprendre à vous connecter à la matière et aux couleurs, 
+                à découvrir vos émotion et surtout à dépasser la peur et le contrôle, 
+                de découvrir la perfection dans l'imperfection.
               </p>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Sessions live, replays disponibles, suivi personnalisé et communauté bienveillante 
-                pour progresser à votre rythme.
+                NB : Aucune expérience en peinture n'est nécessaire pour profiter de ce cours.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700 transition-colors duration-200"
+              <div className="flex justify-start">
+                <button
+                  onClick={() => {
+                    const element = document.getElementById('tarifs');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="inline-flex items-center justify-center px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700 transition-colors duration-200 cursor-pointer z-10 relative"
                 >
                   <Video className="h-5 w-5 mr-2" />
-                  S'inscrire maintenant
-                </Link>
-                <Link
-                  href="#tarifs"
-                  className="inline-flex items-center px-6 py-3 border border-primary-600 text-primary-600 font-medium rounded-md hover:bg-primary-50 transition-colors duration-200"
-                >
                   Voir les formations
-                </Link>
+                </button>
               </div>
             </div>
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                  src="/images/workshop.jpg"
                   alt="Formation peinture en ligne"
                   fill
                   className="object-cover"
@@ -134,12 +131,12 @@ export default function WorkshopPage() {
               Des programmes structurés pour apprendre la peinture à distance avec un suivi professionnel
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {workshopTypes.map((workshop, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{workshop.title}</h3>
-                  <div className="text-3xl font-bold text-primary-600 mb-2">{workshop.price}</div>
+                  {/* <div className="text-3xl font-bold text-primary-600 mb-2">{workshop.price}</div> */}
                   <div className="text-gray-500">{workshop.duration}</div>
                 </div>
                 <p className="text-gray-600 mb-6 leading-relaxed">{workshop.description}</p>
@@ -163,31 +160,6 @@ export default function WorkshopPage() {
         </div>
       </section>
 
-      {/* Gallery Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-6">
-              Réalisations de nos Élèves en Ligne
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Découvrez les magnifiques créations réalisées à distance par nos étudiants depuis chez eux
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <div key={item} className="aspect-square rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <Image
-                  src={`https://images.unsplash.com/photo-${1580130544207 + item}?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80`}
-                  alt={`Création d'élève ${item}`}
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-primary-600">

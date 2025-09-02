@@ -1,12 +1,48 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import HeroCarousel from '@/components/HeroCarousel';
 import ArtworkCard from '@/components/ArtworkCard';
 import { artworks } from '@/lib/data';
 
 export default function HomePage() {
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState('');
+  
   // Get featured artworks by specific IDs
-  const featuredIds = ['1', '3', '5', '7', '9', '11']; // Choisissez les IDs des œuvres que vous voulez
+  const featuredIds = ['1', '3', '5', '8', '9', '11']; // Choisissez les IDs des œuvres que vous voulez
   const featuredArtworks = artworks.filter(artwork => featuredIds.includes(artwork.id));
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setMessage('');
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(data.message);
+        setEmail(''); // Reset form
+      } else {
+        setMessage(data.error || 'Erreur lors de l\'inscription');
+      }
+    } catch (error) {
+      setMessage('Erreur de connexion. Veuillez réessayer.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -22,7 +58,8 @@ export default function HomePage() {
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Découvrez notre sélection d'œuvres d'art exceptionnelles, 
-              créées par l'artiste Souad AZIZ.
+              créées par l'artiste </p>
+              <p> Souad AZIZ.
             </p>
           </div>
 
@@ -70,7 +107,7 @@ export default function HomePage() {
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                  src="/images/art-qui-inspire.jpg"
                   alt="Atelier d'artiste"
                   className="w-full h-full object-cover"
                 />
@@ -91,18 +128,30 @@ export default function HomePage() {
           <p className="text-xl text-primary-100 mb-8">
             Recevez les dernières nouvelles sur nos nouvelles œuvres et événements exclusifs.
           </p>
-          <form className="max-w-md mx-auto flex gap-4">
-            <input
-              type="email"
-              placeholder="Votre adresse email"
-              className="flex-1 px-4 py-3 rounded-md border-0 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600"
-            />
-            <button
-              type="submit"
-              className="px-6 py-3 bg-white text-primary-600 font-medium rounded-md hover:bg-gray-50 transition-colors duration-200"
-            >
-              S'abonner
-            </button>
+          <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto">
+            <div className="flex gap-4 mb-4">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Votre adresse email"
+                required
+                disabled={isSubmitting}
+                className="flex-1 px-4 py-3 rounded-md border-0 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600 disabled:opacity-50"
+              />
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="px-6 py-3 bg-white text-primary-600 font-medium rounded-md hover:bg-gray-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'En cours...' : 'S\'abonner'}
+              </button>
+            </div>
+            {message && (
+              <p className={`text-sm ${message.includes('Erreur') ? 'text-red-200' : 'text-green-200'}`}>
+                {message}
+              </p>
+            )}
           </form>
         </div>
       </section>

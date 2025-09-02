@@ -20,12 +20,13 @@ export default function ArtworkCard({ artwork }: ArtworkCardProps) {
 
   return (
     <div className="group bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
-      <div className="relative aspect-square overflow-hidden">
+      <div className="relative h-64 overflow-hidden flex items-center justify-center bg-gray-50">
         <Image
           src={artwork.image}
           alt={artwork.title}
-          fill
-          className="object-cover group-hover:scale-110 transition-transform duration-500"
+          width={400}
+          height={300}
+          className="object-contain h-full w-auto group-hover:scale-110 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         

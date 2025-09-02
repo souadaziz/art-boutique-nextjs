@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ShoppingCart, Heart, Share2, Minus, Plus } from 'lucide-react';
 import { artworks } from '@/lib/data';
@@ -80,7 +79,7 @@ export default function ArtworkDetailPage() {
           {/* Image Carousel */}
           <ImageCarousel 
             images={artwork.images} 
-            title={artwork.title} 
+            title={artwork.title}
           />
 
           {/* Details */}

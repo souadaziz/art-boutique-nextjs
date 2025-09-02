@@ -17,7 +17,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://www.instagram.com/votre_profil_instagram" 
+                href="https://www.instagram.com/so_abstract_by_souad_aziz?igsh=ZWFyM2w2ZzJoYjBo" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-primary-400 transition-colors duration-200"
@@ -26,7 +26,7 @@ export default function Footer() {
                 <Instagram className="h-6 w-6" />
               </a>
               <a 
-                href="https://www.facebook.com/votre_profil_facebook" 
+                href="https://www.facebook.com/share/19rJY77j3i/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-primary-400 transition-colors duration-200"
@@ -49,6 +49,16 @@ export default function Footer() {
               <li>
                 <Link href="/boutique" className="text-gray-300 hover:text-white transition-colors duration-200">
                   Galerie
+                </Link>
+              </li>
+              <li>
+                <Link href="/art-sur-mesure" className="text-gray-300 hover:text-white transition-colors duration-200">
+                  Art sur Mesure
+                </Link>
+              </li>
+              <li>
+                <Link href="/workshop" className="text-gray-300 hover:text-white transition-colors duration-200">
+                  Workshop
                 </Link>
               </li>
               <li>

@@ -33,12 +33,13 @@ export default function ImageCarousel({ images, title }: ImageCarouselProps) {
   return (
     <div className="relative">
       {/* Image principale */}
-      <div className="aspect-square relative overflow-hidden rounded-2xl shadow-2xl">
+      <div className="relative overflow-hidden rounded-2xl shadow-2xl max-h-[70vh] flex items-center justify-center bg-gray-50">
         <Image
           src={images[currentIndex]}
           alt={`${title} - Image ${currentIndex + 1}`}
-          fill
-          className="object-cover"
+          width={800}
+          height={600}
+          className="object-contain max-h-[70vh] w-auto h-auto"
           priority={currentIndex === 0}
         />
         

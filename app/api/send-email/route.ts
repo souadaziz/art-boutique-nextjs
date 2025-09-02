@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     const { type, ...formData } = body;
 
     // Email de destination (l'artiste)
-    const toEmail = 'souad0110@gmail.com';
+    const toEmail = 'souadazizart@gmail.com';
     
     let subject = '';
     let htmlContent = '';
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
       `;
     } else if (type === 'contact') {
       // Formulaire de contact
-      const { name, email, subject: contactSubject, message } = formData;
+      const { name, email, phone, subject: contactSubject, message } = formData;
       
       subject = `Nouveau message de contact - ${contactSubject}`;
       
@@ -69,6 +69,7 @@ export async function POST(request: NextRequest) {
         <ul>
           <li><strong>Nom :</strong> ${name}</li>
           <li><strong>Email :</strong> ${email}</li>
+          <li><strong>Téléphone :</strong> ${phone}</li>
           <li><strong>Sujet :</strong> ${contactSubject}</li>
         </ul>
 
