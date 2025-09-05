@@ -11,9 +11,9 @@ export default function HomePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState('');
   
-  // Get featured artworks by specific IDs
-  const featuredIds = ['1', '3', '5', '8', '9', '11']; // Choisissez les IDs des œuvres que vous voulez
-  const featuredArtworks = artworks.filter(artwork => featuredIds.includes(artwork.id));
+  // Get featured artworks by specific IDs in the exact order specified
+  const featuredIds = ['5', '11', '9', '7', '25', '20']; // Choisissez les IDs des œuvres que vous voulez
+  const featuredArtworks = featuredIds.map(id => artworks.find(artwork => artwork.id === id)).filter(Boolean);
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

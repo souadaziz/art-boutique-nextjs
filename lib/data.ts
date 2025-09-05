@@ -6,11 +6,11 @@ export const artworks: Artwork[] = [
     title:'Eau d\'Azur',
     artist:'Souad Aziz',
     price:3000,
-    image: '/images/artworks/IMG-20250825-WA0008.jpg',
+    image: '/images/artworks/EaudAzur.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0008.jpg',
-      '/images/artworks/IMG-20250825-WA0008-2.jpg',
-      '/images/artworks/IMG-20250825-WA0008-3.jpg'
+      '/images/artworks/EaudAzur.jpg',
+      '/images/artworks/EaudAzur-2.jpg',
+      '/images/artworks/EaudAzur-3.jpg'
     ],
     description: 'Ce mélange de couleur douce et apaisante, inspire la méditation et la sérénité.',
     category: 'Abstrait',
@@ -24,10 +24,11 @@ export const artworks: Artwork[] = [
     title: 'Secret Garden',
     artist: 'Souad Aziz',
     price: 3360,
-    image: '/images/artworks/IMG-20250825-WA0007.jpg',
+    image: '/images/artworks/SecretGarden.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0007.jpg',
-      '/images/artworks/IMG-20250825-WA0007-2.jpg'
+      '/images/artworks/SecretGarden.jpg',
+      '/images/artworks/SecretGarden-2.jpg',
+      '/images/artworks/SecretGarden-3.jpg'
     ],
     description: 'Une explosion de couleurs harmonieuse inspirée de la beauté florale.',
     category: 'Abstrait',
@@ -41,12 +42,11 @@ export const artworks: Artwork[] = [
     title: 'Senteurs de bois',
     artist: 'Souad Aziz',
     price: 4000,
-    image: '/images/artworks/IMG-20250825-WA0006.jpg',
+    image: '/images/artworks/senteursdebois.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0006.jpg',
-      '/images/artworks/IMG-20250825-WA0006-2.jpg',
-      '/images/artworks/IMG-20250825-WA0006-3.jpg',
-      '/images/artworks/IMG-20250825-WA0006-4.jpg'
+      '/images/artworks/senteursdebois.jpg',
+      '/images/artworks/senteursdebois-2.jpg',
+      '/images/artworks/senteursdebois-3.jpg'
     ],
     description: 'Ce tableau est le troisième de la série « WOOD FRAGRANCE », le mélange de couleur et leur mouvement nous emmène dans un voyage boisé.',
     category: 'Abstrait',
@@ -60,13 +60,11 @@ export const artworks: Artwork[] = [
     title: 'Fleur d\'orient',
     artist: 'Souad Aziz',
     price: 3000,
-    image: '/images/artworks/IMG-20250825-WA0005.jpg',
+    image: '/images/artworks/Fleurdorient.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0005.jpg',
-      '/images/artworks/IMG-20250825-WA0005-2.jpg',
-      '/images/artworks/IMG-20250825-WA0005-3.jpg',
-      '/images/artworks/IMG-20250825-WA0005-4.jpg',
-      '/images/artworks/IMG-20250825-WA0005-5.jpg'
+      '/images/artworks/Fleurdorient.jpg',
+      '/images/artworks/Fleurdorient-2.jpg',
+      '/images/artworks/Fleurdorient-3.jpg'
     ],
     description: 'Ce beau mélange de couleurs apaisante est inspiré de la beauté des plantes aquatiques.',
     category: 'Abstrait',
@@ -80,11 +78,11 @@ export const artworks: Artwork[] = [
     title: 'Summer Rain',
     artist: 'Souad Aziz',
     price: 4400,
-    image: '/images/artworks/IMG-20250825-WA0004.jpg',
+    image: '/images/artworks/SummerRain.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0004.jpg',
-      '/images/artworks/IMG-20250825-WA0004-2.jpg',
-      '/images/artworks/IMG-20250825-WA0004-3.jpg'
+      '/images/artworks/SummerRain.jpg',
+      '/images/artworks/SummerRain-2.jpg',
+      '/images/artworks/SummerRain-3.jpg'
     ],
     description: 'inspiré du Ciel d\'été.',
     category: 'Abstrait',
@@ -98,10 +96,10 @@ export const artworks: Artwork[] = [
     title: 'Sandalwood',
     artist: 'Souad Aziz',
     price: 3500,
-    image: '/images/artworks/IMG-20250825-WA0003.jpg',
+    image: '/images/artworks/sandalwood.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0003.jpg',
-      '/images/artworks/IMG-20250825-WA0003-2.jpg'
+      '/images/artworks/sandalwood.jpg',
+      '/images/artworks/sandalwood-2.jpg'
     ],
     description: 'Ce tableau est le premier de la série « WOOD FRAGRANCE », le mélange de couleur et leur mouvement nous emmène dans un voyage boisé.',
     category: 'Abstrait',
@@ -115,9 +113,10 @@ export const artworks: Artwork[] = [
     title: 'Oud',
     artist: 'Souad Aziz',
     price: 2000,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/oud.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/oud.jpg',
+      '/images/artworks/oud-2.jpg'
     ],
     description: 'Ce tableau est le deuxième de la série « WOOD FRAGRANCE », le mélange de couleur et leur mouvement nous emmène dans un voyage boisé.',
     category: 'Abstrait',
@@ -131,9 +130,12 @@ export const artworks: Artwork[] = [
     title: 'Serenity',
     artist: 'Souad Aziz',
     price: 4000,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/serenity.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/serenity.jpg',
+      '/images/artworks/serenity-2.jpg',
+      '/images/artworks/serenity-3.jpg'
+
     ],
     description: 'excellent mélange de couleur douce et apaisante, inspire la méditation et la sérénité.',
     category: 'Abstrait',
@@ -147,9 +149,11 @@ export const artworks: Artwork[] = [
     title: 'Vague de douceur',
     artist: 'Souad Aziz',
     price: 3500,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/vaguededouceur.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/vaguededouceur.jpg',
+      '/images/artworks/vaguededouceur-2.jpg',
+      '/images/artworks/vaguededouceur-3.jpg' 
     ],
     description: 'excellent mélange de couleur douce et apaisante, inspire la méditation et la sérénité.',
     category: 'Abstrait',
@@ -163,9 +167,9 @@ export const artworks: Artwork[] = [
     title: 'Explosion',
     artist: 'Souad Aziz',
     price: 2000,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/explosion.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/explosion.jpg'
     ],
     description: 'Explosion de couleurs entre le blanc et le noir.',
     category: 'Abstrait',
@@ -179,9 +183,9 @@ export const artworks: Artwork[] = [
     title: 'Black\'n more',
     artist: 'Souad Aziz',
     price: 2000,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/Blacknmore.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/Blacknmore.jpg'
     ],
     description: 'Explosion de couleurs brisant le noir, ce qui reflète la vie en toutes ses composantes.',
     category: 'Abstrait',
@@ -195,9 +199,9 @@ export const artworks: Artwork[] = [
     title: 'Vortex',
     artist: 'Souad Aziz',
     price: 2000,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/vortex.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/vortex.jpg'
     ],
     description: 'Mélange et mouvement de couleurs, inspirés de l\'ambiance floral.',
     category: 'Abstrait',
@@ -211,9 +215,11 @@ export const artworks: Artwork[] = [
     title: 'Wisteria',
     artist: 'Souad Aziz',
     price: 2200,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/wisteria.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/wisteria.jpg',
+      '/images/artworks/wisteria-2.jpg',
+      '/images/artworks/wisteria-3.jpg'
     ],
     description: 'Inspirée de la Wistéria,  ce mariage de couleurs reflète l\'harmonie et l\'élégance.',
     category: 'Abstrait',
@@ -227,9 +233,11 @@ export const artworks: Artwork[] = [
     title: 'Joy',
     artist: 'Souad Aziz',
     price: 4000,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/joy.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/joy.jpg',
+      '/images/artworks/joy-2.jpg',
+      '/images/artworks/joy-3.jpg'
     ],
     description: 'Beau mélange de couleurs vivantes dans des mouvements harmonieux, inspire la joie de vivre.',
     category: 'Abstrait',
@@ -243,9 +251,11 @@ export const artworks: Artwork[] = [
     title: 'La lagune',
     artist: 'Souad Aziz',
     price: 3500,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/lagune.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/lagune.jpg',
+      '/images/artworks/lagune-2.jpg',
+      '/images/artworks/lagune-3.jpg'
     ],
     description: 'une harmonie de couleurs douces, inspiration de l\'harmonie entre le ciel et l\'eau.',
     category: 'Abstrait',
@@ -259,9 +269,11 @@ export const artworks: Artwork[] = [
     title: 'Lotus valley',
     artist: 'Souad Aziz',
     price: 3500,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/lotusvalley.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/lotusvalley.jpg',
+      '/images/artworks/lotusvalley-2.jpg',
+      '/images/artworks/lotusvalley-3.jpg'
     ],
     description: 'Une harmonie de couleurs douces, inspiration de la fleur de lotus.',
     category: 'Abstrait',
@@ -275,9 +287,11 @@ export const artworks: Artwork[] = [
     title: 'Thalassa',
     artist: 'Souad Aziz',
     price: 2000,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/thalassa.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/thalassa.jpg',
+      '/images/artworks/thalassa-2.jpg'
+      
     ],
     description: 'Une très joli mélange de couleur qui inspiré de la beauté des profondeurs marines.',
     category: 'Abstrait',
@@ -291,9 +305,11 @@ export const artworks: Artwork[] = [
     title: 'Elia',
     artist: 'Souad Aziz',
     price: 2000,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/Elia.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/Elia.jpg',
+      '/images/artworks/Elia-2.jpg',
+      '/images/artworks/Elia-3.jpg'
     ],
     description: 'inspiration du thème floral.',
     category: 'Abstrait',
@@ -307,9 +323,9 @@ export const artworks: Artwork[] = [
     title: 'Le regard',
     artist: 'Souad Aziz',
     price: 1500,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/LeRegard.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/LeRegard.jpg'
     ],
     description: 'ENCOURS.',
     category: 'Abstrait',
@@ -323,9 +339,9 @@ export const artworks: Artwork[] = [
     title: 'L\'envolée blanche',
     artist: 'Souad Aziz',
     price: 1500,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/envoléeBlanche.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/envoléeBlanche.jpg'
     ],
     description: 'la danseuse amazigh du moyen atlas modernisée, un mixte de tradition dans l\'identité et le classicisme de la dance, ce tableau est une capture de mouvement en suspension, une dance d\'esprit.',
     category: 'Abstrait',
@@ -355,9 +371,11 @@ export const artworks: Artwork[] = [
     title: 'Tierra-Mar',
     artist: 'Souad Aziz',
     price: 3000,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/tierra-mar.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/tierra-mar.jpg',
+      '/images/artworks/tierra-mar-2.jpg',
+      '/images/artworks/tierra-mar-3.jpg'
     ],
     description: 'Une explosion de couleurs vives représentant la complémentarité entre vie terrestre et marine, évoquant le mouvement de l\'existence.',
     category: 'Abstrait',
@@ -371,9 +389,11 @@ export const artworks: Artwork[] = [
     title: 'Fall',
     artist: 'Souad Aziz',
     price: 3000,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/fall.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/fall.jpg',
+      '/images/artworks/fall-2.jpg'
+      
     ],
     description: 'Un paysage travaillé avec un mariage de couleurs douce parfait pour les amoureux de l\'ambiance  automnale.',
     category: 'Abstrait',
@@ -387,9 +407,10 @@ export const artworks: Artwork[] = [
     title: 'Reflexion',
     artist: 'Souad Aziz',
     price: 1500,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/reflexion.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/reflexion.jpg',
+      '/images/artworks/reflexion-2.jpg'
     ],
     description: 'Excellent mélange de couleur douce et apaisante, inspire la méditation et la sérénité.',
     category: 'Abstrait',
@@ -403,9 +424,11 @@ export const artworks: Artwork[] = [
     title: 'les chemins du pardon',
     artist: 'Souad Aziz',
     price: 4500,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
+    image: '/images/artworks/lescheminsdupardon.jpg',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/lescheminsdupardon.jpg',
+      '/images/artworks/lescheminsdupardon-2.jpg',
+      '/images/artworks/lescheminsdupardon-3.jpg'
     ],
     description: 'Ce tableau se distingue par sa composition de couleurs douce et harmonieuse mais mouvementée, et qui apporte un message spirituel profond.',
     category: 'Abstrait',

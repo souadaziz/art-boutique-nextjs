@@ -10,21 +10,21 @@ export default function AboutPage() {
 
   const testimonials = [
     {
-      name: "Marie Dubois",
-      role: "Collectionneuse",
-      content: "Les œuvres de Souad sont d'une beauté exceptionnelle. Chaque tableau raconte une histoire unique et apporte une énergie positive à mon salon.",
+      name: "Nadia Salam",
+      role: "Ophtalmologue, Mohammadia",
+      content: "Chère Souad, Je voudrais te remercier pour le tableau que tu as crée pour moi <strong><em>'vague de douceur'</em></strong> c'est un travail qui émane d'une vraie douceur et je suis tellement heureuse de l'avoir dans mon cabinet.",
       rating: 5
     },
     {
-      name: "Ahmed Benali",
-      role: "Client workshop",
-      content: "Le workshop m'a permis de découvrir ma créativité. L'approche de Souad est bienveillante et inspirante. Je recommande vivement !",
+      name: "Wijdane Ettaje",
+      role: "Commande personnalisée, Meknès",
+      content: "Je suis profondément reconnaissante pour cette oeuvre artistique magnifique, réalisée avec patience, créativité et sensibilité.L'artiste Souad a su transformer un simple mur en une œuvre vivante, remplie de couleurs, de détails et d'émotions. Ce qui apporte de la chaleur, de l'énergie et une atmosphère unique à la pièce.<br><br>Chaque coup de pinceau reflète non seulement ton grand talent, mais aussi une passion sincère pour l'art. Merci du fond du cœur Souad pour cette œuvre qui restera longtemps un témoignage de beauté et de générosité.",
       rating: 5
     },
     {
-      name: "Sophie Martin",
-      role: "Commande personnalisée",
-      content: "Souad a créé une œuvre sur mesure qui dépasse toutes mes attentes. Son écoute et sa créativité sont remarquables.",
+      name: "Fayza mamad",
+      role: "Dentiste, Témara",
+      content: "J'ai reçu un tableau absolument magnifique ! Les détails, les couleurs et le soin apporté à la réalisation en font une véritable œuvre d'art. Il apporte une touche unique et chaleureuse à mon cabinet. Merci pour ce travail plein de passion et de talent!",
       rating: 5
     },
     {
@@ -143,7 +143,7 @@ export default function AboutPage() {
               </div>
               
               <blockquote className="text-xl md:text-2xl text-gray-700 mb-6 leading-relaxed">
-                "{testimonials[currentTestimonial].content}"
+                "<span dangerouslySetInnerHTML={{ __html: testimonials[currentTestimonial].content }}></span>"
               </blockquote>
               
               <div className="text-center">

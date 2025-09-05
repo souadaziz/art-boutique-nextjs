@@ -27,9 +27,11 @@ export default function BoutiquePage() {
 
         {/* Artworks Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {artworks.map((artwork) => (
-            <ArtworkCard key={artwork.id} artwork={artwork} />
-          ))}
+          {artworks
+            .sort((a, b) => parseInt(a.id) - parseInt(b.id))
+            .map((artwork) => (
+              <ArtworkCard key={artwork.id} artwork={artwork} />
+            ))}
         </div>
       </div>
     </div>
