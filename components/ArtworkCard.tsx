@@ -19,7 +19,7 @@ export default function ArtworkCard({ artwork }: ArtworkCardProps) {
   };
 
   return (
-    <div className="group bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+    <Link href={`/boutique/${artwork.id}`} className="block group bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
       <div className="relative h-64 overflow-hidden flex items-center justify-center bg-gray-50">
         <Image
           src={artwork.image}
@@ -30,15 +30,12 @@ export default function ArtworkCard({ artwork }: ArtworkCardProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
-        {/* Hover Actions */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {/* Hover Actions - Desktop only */}
+        <div className="hidden md:flex absolute inset-0 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="flex space-x-3">
-            <Link
-              href={`/boutique/${artwork.id}`}
-              className="bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full transition-all duration-200 transform hover:scale-110"
-            >
+            <div className="bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full transition-all duration-200 transform hover:scale-110">
               <Eye className="h-5 w-5" />
-            </Link>
+            </div>
             <button
               onClick={handleAddToCart}
               className="bg-primary-500 hover:bg-primary-600 text-white p-3 rounded-full transition-all duration-200 transform hover:scale-110"
@@ -47,6 +44,14 @@ export default function ArtworkCard({ artwork }: ArtworkCardProps) {
             </button>
           </div>
         </div>
+
+        {/* Mobile/Tablet Cart Button */}
+        <button
+          onClick={handleAddToCart}
+          className="md:hidden absolute bottom-2 right-2 bg-primary-500 hover:bg-primary-600 text-white p-2 rounded-full transition-all duration-200 transform hover:scale-110"
+        >
+          <ShoppingCart className="h-4 w-4" />
+        </button>
 
         {/* Price Badge */}
         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
@@ -78,14 +83,11 @@ export default function ArtworkCard({ artwork }: ArtworkCardProps) {
             <p>{artwork.dimensions}</p>
             <p>{artwork.technique}</p>
           </div>
-          <Link
-            href={`/boutique/${artwork.id}`}
-            className="text-primary-600 hover:text-primary-700 font-medium text-sm transition-colors duration-200"
-          >
+          <span className="text-primary-600 hover:text-primary-700 font-medium text-sm transition-colors duration-200">
             Voir plus →
-          </Link>
+          </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

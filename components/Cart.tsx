@@ -3,9 +3,9 @@
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { X, Plus, Minus, ShoppingBag } from 'lucide-react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
+import CloudinaryImage from './CloudinaryImage';
 
 interface CartProps {
   isOpen: boolean;
@@ -78,7 +78,7 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                               {items.map((item) => (
                                 <li key={item.artwork.id} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                    <Image
+                                    <CloudinaryImage
                                       src={item.artwork.image}
                                       alt={item.artwork.title}
                                       width={96}

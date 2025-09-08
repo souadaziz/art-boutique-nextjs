@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { MapPin, Phone, Mail, Clock, Send, AlertCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -11,18 +11,156 @@ export default function ContactPage() {
     subject: '',
     message: ''
   });
+  const [selectedCountry, setSelectedCountry] = useState('MA');
+  const [errors, setErrors] = useState({
+    email: '',
+    phone: ''
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // Countries with phone codes and validation patterns
+  const countries = [
+    { 
+      code: 'MA', 
+      name: 'Maroc', 
+      phoneCode: '+212', 
+      flag: '🇲🇦',
+      pattern: /^(\+212\s?[5-7]\d{8}|0[5-7]\d{8}|\+212\s?[5-7]\d{2}\s?\d{3}\s?\d{3}|0[5-7]\d{2}\s?\d{3}\s?\d{3})$/,
+      placeholder: '+212 6XX XXX XXX'
+    },
+    { 
+      code: 'FR', 
+      name: 'France', 
+      phoneCode: '+33', 
+      flag: '🇫🇷',
+      pattern: /^(\+33\s?[1-9]\d{8}|0[1-9]\d{8}|\+33\s?[1-9]\d{2}\s?\d{3}\s?\d{3}|0[1-9]\d{2}\s?\d{3}\s?\d{3})$/,
+      placeholder: '+33 6XX XXX XXX'
+    },
+    { 
+      code: 'ES', 
+      name: 'Espagne', 
+      phoneCode: '+34', 
+      flag: '🇪🇸',
+      pattern: /^(\+34\s?[6-9]\d{8}|[6-9]\d{8}|\+34\s?[6-9]\d{2}\s?\d{3}\s?\d{3}|[6-9]\d{2}\s?\d{3}\s?\d{3})$/,
+      placeholder: '+34 6XX XXX XXX'
+    },
+    { 
+      code: 'BE', 
+      name: 'Belgique', 
+      phoneCode: '+32', 
+      flag: '🇧🇪',
+      pattern: /^(\+32\s?4\d{8}|04\d{8}|\+32\s?4\d{2}\s?\d{3}\s?\d{3}|04\d{2}\s?\d{3}\s?\d{3})$/,
+      placeholder: '+32 4XX XXX XXX'
+    },
+    { 
+      code: 'CA', 
+      name: 'Canada', 
+      phoneCode: '+1', 
+      flag: '🇨🇦',
+      pattern: /^(\+1\s?\d{10}|\d{10}|\+1\s?\d{3}\s?\d{3}\s?\d{4}|\d{3}\s?\d{3}\s?\d{4})$/,
+      placeholder: '+1 XXX XXX XXXX'
+    }
+  ];
+
+  // Validation functions
+  const validateEmail = (email: string): string => {
+    if (!email) return 'L\'adresse email est requise';
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return 'Veuillez saisir une adresse email valide (exemple: nom@domaine.com)';
+    }
+    return '';
+  };
+
+  const validatePhone = (phone: string): string => {
+    if (!phone) return 'Le numéro de téléphone est requis';
+    
+    const selectedCountryData = countries.find(c => c.code === selectedCountry);
+    if (!selectedCountryData) return 'Pays non valide';
+    
+    const cleanPhone = phone.replace(/\s/g, '');
+    if (!selectedCountryData.pattern.test(cleanPhone)) {
+      return `Veuillez saisir un numéro de téléphone valide pour ${selectedCountryData.name} (exemple: ${selectedCountryData.placeholder})`;
+    }
+    return '';
+  };
+
+  // Get current country data
+  const getCurrentCountry = () => {
+    return countries.find(c => c.code === selectedCountry) || countries[0];
+  };
+
+  // Handle country change
+  const handleCountryChange = (countryCode: string) => {
+    setSelectedCountry(countryCode);
+    const country = countries.find(c => c.code === countryCode);
+    if (country) {
+      // Auto-populate country code in phone field if empty or update existing
+      const currentPhone = formData.phone;
+      if (!currentPhone || currentPhone.startsWith('+')) {
+        setFormData(prev => ({
+          ...prev,
+          phone: country.phoneCode + ' '
+        }));
+      }
+      // Clear phone validation error when country changes
+      setErrors(prev => ({
+        ...prev,
+        phone: ''
+      }));
+    }
+  };
+
+  // Initialize phone code on component mount
+  useEffect(() => {
+    const country = getCurrentCountry();
+    if (country && !formData.phone) {
+      setFormData(prev => ({
+        ...prev,
+        phone: country.phoneCode + ' '
+      }));
+    }
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+
+    // Real-time validation for email and phone
+    if (name === 'email') {
+      setErrors(prev => ({
+        ...prev,
+        email: validateEmail(value)
+      }));
+    } else if (name === 'phone') {
+      setErrors(prev => ({
+        ...prev,
+        phone: validatePhone(value)
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate all fields before submission
+    const emailError = validateEmail(formData.email);
+    const phoneError = validatePhone(formData.phone);
+    
+    setErrors({
+      email: emailError,
+      phone: phoneError
+    });
+    
+    // If there are validation errors, don't submit
+    if (emailError || phoneError) {
+      return;
+    }
+    
     setIsSubmitting(true);
     
     try {
@@ -47,6 +185,7 @@ export default function ContactPage() {
 
       setIsSubmitted(true);
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setErrors({ email: '', phone: '' });
     } catch (error) {
       console.error('Erreur:', error);
       alert('Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer.');
@@ -166,9 +305,19 @@ export default function ContactPage() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
+                      className={`w-full px-4 py-3 border rounded-md focus:ring-2 transition-colors duration-200 ${
+                        errors.email 
+                          ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
+                          : 'border-gray-300 focus:ring-primary-500 focus:border-primary-500'
+                      }`}
                       placeholder="votre@email.com"
                     />
+                    {errors.email && (
+                      <div className="mt-2 flex items-center gap-2 text-red-600 text-sm">
+                        <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                        <span>{errors.email}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -176,16 +325,42 @@ export default function ContactPage() {
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
                     Numéro de téléphone *
                   </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
-                    placeholder="+212 6XX XXX XXX"
-                  />
+                  <div className="flex gap-2">
+                    {/* Country Selector */}
+                    <select
+                      value={selectedCountry}
+                      onChange={(e) => handleCountryChange(e.target.value)}
+                      className="px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white min-w-[140px] transition-colors duration-200"
+                    >
+                      {countries.map((country) => (
+                        <option key={country.code} value={country.code}>
+                          {country.flag} {country.name}
+                        </option>
+                      ))}
+                    </select>
+                    
+                    {/* Phone Input */}
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      required
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className={`flex-1 px-4 py-3 border rounded-md focus:ring-2 transition-colors duration-200 ${
+                        errors.phone 
+                          ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
+                          : 'border-gray-300 focus:ring-primary-500 focus:border-primary-500'
+                      }`}
+                      placeholder={getCurrentCountry().placeholder}
+                    />
+                  </div>
+                  {errors.phone && (
+                    <div className="mt-2 flex items-center gap-2 text-red-600 text-sm">
+                      <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                      <span>{errors.phone}</span>
+                    </div>
+                  )}
                 </div>
 
                 <div>

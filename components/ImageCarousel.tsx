@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -11,6 +11,8 @@ interface ImageCarouselProps {
 
 export default function ImageCarousel({ images, title }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) => 
@@ -28,19 +30,46 @@ export default function ImageCarousel({ images, title }: ImageCarouselProps) {
     setCurrentIndex(index);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && images.length > 1) {
+      goToNext();
+    }
+    if (isRightSwipe && images.length > 1) {
+      goToPrevious();
+    }
+  };
+
   if (images.length === 0) return null;
 
   return (
     <div className="relative">
       {/* Image principale */}
-      <div className="relative overflow-hidden rounded-2xl shadow-2xl max-h-[70vh] flex items-center justify-center bg-gray-50">
+      <div 
+        className="relative overflow-hidden rounded-2xl shadow-2xl max-h-[70vh] flex items-center justify-center bg-gray-50 touch-pan-y"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <Image
           src={images[currentIndex]}
           alt={`${title} - Image ${currentIndex + 1}`}
           width={800}
           height={600}
-          className="object-contain max-h-[70vh] w-auto h-auto"
-          priority={currentIndex === 0}
+          className="max-w-full max-h-full object-contain select-none"
         />
         
         {/* Navigation arrows - seulement si plus d'une image */}

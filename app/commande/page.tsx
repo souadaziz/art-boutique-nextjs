@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 import Image from 'next/image';
-import { CheckCircle, ArrowLeft } from 'lucide-react';
+import { CheckCircle, ArrowLeft, AlertCircle } from 'lucide-react';
 
 export default function CommandePage() {
   const { items, total, clearCart } = useCart();
@@ -18,8 +18,117 @@ export default function CommandePage() {
     pays: 'Maroc',
     message: ''
   });
+  const [selectedCountry, setSelectedCountry] = useState('MA');
+  const [errors, setErrors] = useState({
+    email: '',
+    telephone: ''
+  });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Countries with phone codes and validation patterns
+  const countries = [
+    { 
+      code: 'MA', 
+      name: 'Maroc', 
+      phoneCode: '+212', 
+      flag: '🇲🇦',
+      pattern: /^(\+212\s?[5-7]\d{8}|0[5-7]\d{8}|\+212\s?[5-7]\d{2}\s?\d{3}\s?\d{3}|0[5-7]\d{2}\s?\d{3}\s?\d{3})$/,
+      placeholder: '+212 6XX XXX XXX'
+    },
+    { 
+      code: 'FR', 
+      name: 'France', 
+      phoneCode: '+33', 
+      flag: '🇫🇷',
+      pattern: /^(\+33\s?[1-9]\d{8}|0[1-9]\d{8}|\+33\s?[1-9]\d{2}\s?\d{3}\s?\d{3}|0[1-9]\d{2}\s?\d{3}\s?\d{3})$/,
+      placeholder: '+33 6XX XXX XXX'
+    },
+    { 
+      code: 'ES', 
+      name: 'Espagne', 
+      phoneCode: '+34', 
+      flag: '🇪🇸',
+      pattern: /^(\+34\s?[6-9]\d{8}|[6-9]\d{8}|\+34\s?[6-9]\d{2}\s?\d{3}\s?\d{3}|[6-9]\d{2}\s?\d{3}\s?\d{3})$/,
+      placeholder: '+34 6XX XXX XXX'
+    },
+    { 
+      code: 'BE', 
+      name: 'Belgique', 
+      phoneCode: '+32', 
+      flag: '🇧🇪',
+      pattern: /^(\+32\s?4\d{8}|04\d{8}|\+32\s?4\d{2}\s?\d{3}\s?\d{3}|04\d{2}\s?\d{3}\s?\d{3})$/,
+      placeholder: '+32 4XX XXX XXX'
+    },
+    { 
+      code: 'CA', 
+      name: 'Canada', 
+      phoneCode: '+1', 
+      flag: '🇨🇦',
+      pattern: /^(\+1\s?\d{10}|\d{10}|\+1\s?\d{3}\s?\d{3}\s?\d{4}|\d{3}\s?\d{3}\s?\d{4})$/,
+      placeholder: '+1 XXX XXX XXXX'
+    }
+  ];
+
+  // Validation functions
+  const validateEmail = (email: string): string => {
+    if (!email) return 'L\'adresse email est requise';
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return 'Veuillez saisir une adresse email valide (exemple: nom@domaine.com)';
+    }
+    return '';
+  };
+
+  const validatePhone = (phone: string): string => {
+    if (!phone) return 'Le numéro de téléphone est requis';
+    
+    const selectedCountryData = countries.find(c => c.code === selectedCountry);
+    if (!selectedCountryData) return 'Pays non valide';
+    
+    const cleanPhone = phone.replace(/\s/g, '');
+    if (!selectedCountryData.pattern.test(cleanPhone)) {
+      return `Veuillez saisir un numéro de téléphone valide pour ${selectedCountryData.name} (exemple: ${selectedCountryData.placeholder})`;
+    }
+    return '';
+  };
+
+  // Get current country data
+  const getCurrentCountry = () => {
+    return countries.find(c => c.code === selectedCountry) || countries[0];
+  };
+
+  // Handle country change
+  const handleCountryChange = (countryCode: string) => {
+    setSelectedCountry(countryCode);
+    const country = countries.find(c => c.code === countryCode);
+    if (country) {
+      // Auto-populate country code in phone field if empty or update existing
+      const currentPhone = formData.telephone;
+      if (!currentPhone || currentPhone.startsWith('+')) {
+        setFormData(prev => ({
+          ...prev,
+          telephone: country.phoneCode + ' '
+        }));
+      }
+      // Clear phone validation error when country changes
+      setErrors(prev => ({
+        ...prev,
+        telephone: ''
+      }));
+    }
+  };
+
+  // Initialize phone code on component mount
+  useEffect(() => {
+    const country = getCurrentCountry();
+    if (country && !formData.telephone) {
+      setFormData(prev => ({
+        ...prev,
+        telephone: country.phoneCode + ' '
+      }));
+    }
+  }, []);
 
   // Rediriger si le panier est vide
   useEffect(() => {
@@ -34,10 +143,38 @@ export default function CommandePage() {
       ...prev,
       [name]: value
     }));
+
+    // Real-time validation for email and phone
+    if (name === 'email') {
+      setErrors(prev => ({
+        ...prev,
+        email: validateEmail(value)
+      }));
+    } else if (name === 'telephone') {
+      setErrors(prev => ({
+        ...prev,
+        telephone: validatePhone(value)
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate all fields before submission
+    const emailError = validateEmail(formData.email);
+    const phoneError = validatePhone(formData.telephone);
+    
+    setErrors({
+      email: emailError,
+      telephone: phoneError
+    });
+    
+    // If there are validation errors, don't submit
+    if (emailError || phoneError) {
+      return;
+    }
+    
     setIsLoading(true);
 
     try {
@@ -64,6 +201,7 @@ export default function CommandePage() {
 
       setIsSubmitted(true);
       clearCart();
+      setErrors({ email: '', telephone: '' });
     } catch (error) {
       console.error('Erreur:', error);
       alert('Une erreur est survenue lors de l\'envoi de votre commande. Veuillez réessayer.');
@@ -139,8 +277,18 @@ export default function CommandePage() {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 transition-colors duration-200 ${
+                      errors.email 
+                        ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
+                        : 'border-gray-300 focus:ring-primary-500 focus:border-transparent'
+                    }`}
                   />
+                  {errors.email && (
+                    <div className="mt-2 flex items-center gap-2 text-red-600 text-sm">
+                      <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                      <span>{errors.email}</span>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -148,15 +296,42 @@ export default function CommandePage() {
                 <label htmlFor="telephone" className="block text-sm font-medium text-gray-700 mb-1">
                   Téléphone *
                 </label>
-                <input
-                  type="tel"
-                  id="telephone"
-                  name="telephone"
-                  required
-                  value={formData.telephone}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                />
+                <div className="flex gap-2">
+                  {/* Country Selector */}
+                  <select
+                    value={selectedCountry}
+                    onChange={(e) => handleCountryChange(e.target.value)}
+                    className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white min-w-[140px]"
+                  >
+                    {countries.map((country) => (
+                      <option key={country.code} value={country.code}>
+                        {country.flag} {country.name}
+                      </option>
+                    ))}
+                  </select>
+                  
+                  {/* Phone Input */}
+                  <input
+                    type="tel"
+                    id="telephone"
+                    name="telephone"
+                    required
+                    value={formData.telephone}
+                    onChange={handleInputChange}
+                    className={`flex-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 transition-colors duration-200 ${
+                      errors.telephone 
+                        ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
+                        : 'border-gray-300 focus:ring-primary-500 focus:border-transparent'
+                    }`}
+                    placeholder={getCurrentCountry().placeholder}
+                  />
+                </div>
+                {errors.telephone && (
+                  <div className="mt-2 flex items-center gap-2 text-red-600 text-sm">
+                    <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                    <span>{errors.telephone}</span>
+                  </div>
+                )}
               </div>
 
               <div>
