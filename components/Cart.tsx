@@ -6,6 +6,7 @@ import { X, Plus, Minus, ShoppingBag } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 import Image from 'next/image';
+import CloudinaryImage from '@/components/CloudinaryImage';
 
 interface CartProps {
   isOpen: boolean;
@@ -78,12 +79,13 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                               {items.map((item) => (
                                 <li key={item.artwork.id} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                    <Image
-                                      src={item.artwork.image}
+                                    <CloudinaryImage
+                                      publicId={item.artwork.cloudinaryId || ''}
                                       alt={item.artwork.title}
                                       width={96}
                                       height={96}
                                       className="h-full w-full object-cover object-center"
+                                      fallbackSrc={item.artwork.image}
                                     />
                                   </div>
 

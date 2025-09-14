@@ -20,11 +20,6 @@ export default function WorkshopPage() {
       icon: MessageSquare,
       title: 'Suivi Personnalisé',
       description: 'Groupe WhatsApp privé pour poser vos questions et recevoir des conseils entre les cours.'
-    },
-    {
-      icon: Wifi,
-      title: 'Accès Flexible',
-      description: 'Participez depuis chez vous, replays disponibles si vous manquez une session.'
     }
   ];
 
@@ -32,16 +27,16 @@ export default function WorkshopPage() {
     {
       title: 'Formation Débutant',
       duration: '4 semaines',
-      price: '890 MAD',
+      price: '200 MAD',
       description: 'Programme complet en ligne pour apprendre les bases de la peinture depuis chez vous.',
-      includes: ['4 sessions live de 2h', 'Replays à vie', 'Liste matériel PDF', 'Groupe WhatsApp privé']
+      includes: ['4 sessions live de 1h', 'Liste matériel PDF', 'Groupe WhatsApp privé']
     },
     {
       title: 'Coaching Privé',
       duration: 'Flexible',
-      price: 'À partir de 750 MAD/h',
+      price: 'À partir de 200 MAD/Heure',
       description: 'Cours particulier en visioconférence adapté à vos objectifs artistiques spécifiques.',
-      includes: ['Sessions 1-to-1', 'Programme sur mesure', 'Suivi WhatsApp illimité', 'Replay personnel']
+      includes: ['Sessions 1-to-1', 'Programme sur mesure', 'Suivi WhatsApp illimité']
     }
   ];
 
@@ -106,7 +101,7 @@ export default function WorkshopPage() {
               Une méthode d'apprentissage moderne et flexible qui s'adapte à votre rythme de vie
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {workshopFeatures.map((feature, index) => (
               <div key={index} className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 rounded-full mb-4">
@@ -128,7 +123,7 @@ export default function WorkshopPage() {
               Nos Formations en Ligne
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Des programmes structurés pour apprendre la peinture à distance avec un suivi professionnel
+            Éveillez votre créativité et libérez votre esprit avec nos formations d'art intuitif.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -136,7 +131,7 @@ export default function WorkshopPage() {
               <div key={index} className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{workshop.title}</h3>
-                  {/* <div className="text-3xl font-bold text-primary-600 mb-2">{workshop.price}</div> */}
+                  {<div className="text-1xl font-bold text-primary-600 mb-2">{workshop.price}</div>}
                   <div className="text-gray-500">{workshop.duration}</div>
                 </div>
                 <p className="text-gray-600 mb-6 leading-relaxed">{workshop.description}</p>
@@ -152,7 +147,7 @@ export default function WorkshopPage() {
                   href="/contact"
                   className="w-full inline-flex items-center justify-center px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700 transition-colors duration-200"
                 >
-                  Réserver
+                  S'inscrire
                 </Link>
               </div>
             ))}
@@ -167,14 +162,36 @@ export default function WorkshopPage() {
           <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">
             Prêt à commencer votre formation ?
           </h2>
-          <p className="text-lg text-primary-100 mb-8">
-            Rejoignez notre communauté d'artistes en ligne et développez vos talents depuis chez vous, 
-            à votre rythme et avec un accompagnement professionnel.
-          </p>
+          <div className="mb-8">
+            <p className="text-lg text-primary-100 mb-6">
+              Ce que vous allez apprendre :
+            </p>
+            <ul className="space-y-3 mb-6 max-w-lg mx-auto text-left">
+              <li className="flex items-center text-primary-100">
+                <Heart className="h-4 w-4 text-primary-200 mr-3 flex-shrink-0" />
+                Découvrir et maîtriser les bases de l'art intuitif
+              </li>
+              <li className="flex items-center text-primary-100">
+                <Heart className="h-4 w-4 text-primary-200 mr-3 flex-shrink-0" />
+                Explorer différentes techniques de fluid art
+              </li>
+              <li className="flex items-center text-primary-100">
+                <Heart className="h-4 w-4 text-primary-200 mr-3 flex-shrink-0" />
+                Utiliser les couleurs pour exprimer vos émotions
+              </li>
+              <li className="flex items-center text-primary-100">
+                <Heart className="h-4 w-4 text-primary-200 mr-3 flex-shrink-0" />
+                Développer votre confiance en vous et votre créativité
+              </li>
+            </ul>
+            <p className="text-lg text-primary-100">
+              Prêt à vous lancer dans cette aventure créative ?
+            </p>
+          </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="inline-flex items-center px-8 py-3 bg-white text-primary-600 font-medium rounded-md hover:bg-gray-50 transition-colors duration-200"
+              className="inline-flex items-center px-8 py-3 border border-white text-white font-medium rounded-md hover:bg-white hover:text-primary-600 transition-colors duration-200"
             >
               <Video className="h-5 w-5 mr-2" />
               Commencer ma formation

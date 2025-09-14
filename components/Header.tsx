@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ShoppingBag, Menu, X } from 'lucide-react';
@@ -12,7 +12,16 @@ interface HeaderProps {
 
 export default function Header({ onCartClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isWritten, setIsWritten] = useState(false);
   const { itemCount } = useCart();
+
+  useEffect(() => {
+    // Déclencher l'animation après un court délai
+    const timer = setTimeout(() => {
+      setIsWritten(true);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const navigation = [
     { name: 'Accueil', href: '/' },
@@ -37,10 +46,36 @@ export default function Header({ onCartClick }: HeaderProps) {
               className="object-contain"
             />
             <div className="flex flex-col leading-none items-center">
-              <div className="text-4xl font-qwitcher-grypen font-normal text-black tracking-wide">
-                SouadAziz
+              <div className="text-4xl font-qwitcher-grypen font-normal text-black tracking-wide relative">
+                <span 
+                  className={`inline-block relative ${
+                    isWritten ? '' : 'opacity-0'
+                  }`}
+                  style={{
+                    animation: isWritten ? 'handwriting 2s ease-out forwards' : 'none',
+                    clipPath: isWritten ? 'inset(0 0 0 0)' : 'inset(0 100% 0 0)',
+                    transition: 'clip-path 2s ease-out'
+                  }}
+                >
+                  SouadAziz
+                  {isWritten && (
+                    <span 
+                      className="absolute -right-2 top-0 w-0.5 h-full bg-primary-600 opacity-80"
+                      style={{
+                        animation: 'pen 2s ease-out forwards, blink 0.8s infinite 2s'
+                      }}
+                    />
+                  )}
+                </span>
               </div>
-              <div className="text-1xl font-display font-normal text-black tracking-wide -mt-1">
+              <div 
+                className="text-1xl font-display font-normal text-black tracking-wide -mt-1"
+                style={{
+                  transform: 'translateY(32px)',
+                  opacity: 0,
+                  animation: isWritten ? 'slideUp 1s ease-out 0.5s forwards' : 'none'
+                }}
+              >
                 ART
               </div>
             </div>

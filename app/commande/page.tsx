@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 import Image from 'next/image';
+import CloudinaryImage from '@/components/CloudinaryImage';
 import { CheckCircle, ArrowLeft, AlertCircle } from 'lucide-react';
 
 export default function CommandePage() {
@@ -430,12 +431,13 @@ export default function CommandePage() {
               {items.map((item) => (
                 <div key={item.artwork.id} className="flex items-center space-x-4">
                   <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                    <Image
-                      src={item.artwork.image}
+                    <CloudinaryImage
+                      publicId={item.artwork.cloudinaryId || ''}
                       alt={item.artwork.title}
                       width={64}
                       height={64}
                       className="h-full w-full object-cover object-center"
+                      fallbackSrc={item.artwork.image}
                     />
                   </div>
                   <div className="flex-1">

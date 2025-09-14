@@ -208,7 +208,7 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: 'Email',
-      details: ['souadazizart@gamil.com']
+      details: ['souadazizart@gmail.com']
     },
   ];
 
@@ -376,13 +376,13 @@ export default function ContactPage() {
                     className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
                   >
                     <option value="">Sélectionnez un sujet</option>
-                    <option value="information">Demande d'information</option>
+                    <option value="information">Demande d'informations</option>
                     <option value="achat">Achat d'un tableau</option>
                     <option value="commande p">Commande personnalisée</option>
                     <option value="artiste">Collaboration</option>
                     <option value="coaching">Coaching privé</option>
                     <option value="formation">Formation débutant</option>
-                    <option value="autre">Autre</option>
+                    <option value="autre">Autres</option>
                   </select>
                 </div>
 

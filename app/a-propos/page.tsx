@@ -191,7 +191,7 @@ export default function AboutPage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-6">
-            Prêt à Découvrir l'Art ?
+            Prêt à Découvrir mon Univers ?
           </h2>
           <p className="text-lg text-gray-600 mb-8">
           Explorez ma collection et trouvez l'œuvre qui parlera à votre cœur, 
@@ -207,7 +207,7 @@ export default function AboutPage() {
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center px-8 py-3 border border-primary-600 text-primary-600 font-medium rounded-md hover:bg-primary-50 transition-colors duration-200"
+              className="inline-flex items-center px-8 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700 transition-colors duration-200"
             >
               Nous contacter
             </Link>

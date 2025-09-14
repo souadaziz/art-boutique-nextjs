@@ -1,8 +1,16 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Palette, MessageCircle, Clock, CheckCircle } from 'lucide-react';
 
 export default function ArtSurMesurePage() {
+  const scrollToProcess = () => {
+    const processSection = document.getElementById('process-section');
+    if (processSection) {
+      processSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   const processSteps = [
     {
       icon: MessageCircle,
@@ -42,12 +50,12 @@ export default function ArtSurMesurePage() {
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                 Chaque commande sur mesure est une collaboration artistique où vos idées rencontrent ma créativité pour donner naissance à une pièce exceptionnelle.
               </p>
-              <Link
-                href="/contact"
+              <button
+                onClick={scrollToProcess}
                 className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700 transition-colors duration-200"
               >
-                Commencer mon projet
-              </Link>
+                Comment ça marche ?
+              </button>
             </div>
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
@@ -64,7 +72,7 @@ export default function ArtSurMesurePage() {
       </section>
 
       {/* Process Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="process-section" className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-6">
@@ -101,9 +109,9 @@ export default function ArtSurMesurePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="inline-flex items-center px-8 py-3 bg-white text-primary-600 font-medium rounded-md hover:bg-gray-50 transition-colors duration-200"
+              className="inline-flex items-center px-8 py-3 border border-white bg-white text-primary-600 font-medium rounded-md transition-colors duration-200"
             >
-              Demander un devis
+              Commencer mon projet
             </Link>
             <Link
               href="/boutique"

@@ -10,7 +10,7 @@ export default function HomePage() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState('');
-  
+
   // Get featured artworks by specific IDs in the exact order specified
   const featuredIds = ['5', '11', '9', '7', '25', '20']; // Choisissez les IDs des œuvres que vous voulez
   const featuredArtworks = featuredIds.map(id => artworks.find(artwork => artwork.id === id)).filter(Boolean);

@@ -1,10 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { ShoppingCart, Eye } from 'lucide-react';
 import { Artwork } from '@/types';
 import { useCart } from '@/lib/cart-context';
+import CloudinaryImage from '@/components/CloudinaryImage';
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -21,12 +21,13 @@ export default function ArtworkCard({ artwork }: ArtworkCardProps) {
   return (
     <Link href={`/boutique/${artwork.id}`} className="block group bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
       <div className="relative h-64 overflow-hidden flex items-center justify-center bg-gray-50">
-        <Image
-          src={artwork.image}
+        <CloudinaryImage
+          publicId={artwork.cloudinaryId || ''}
           alt={artwork.title}
           width={400}
           height={300}
           className="object-contain h-full w-auto group-hover:scale-110 transition-transform duration-500"
+          fallbackSrc={artwork.image}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
@@ -36,22 +37,26 @@ export default function ArtworkCard({ artwork }: ArtworkCardProps) {
             <div className="bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full transition-all duration-200 transform hover:scale-110">
               <Eye className="h-5 w-5" />
             </div>
-            <button
-              onClick={handleAddToCart}
-              className="bg-primary-500 hover:bg-primary-600 text-white p-3 rounded-full transition-all duration-200 transform hover:scale-110"
-            >
-              <ShoppingCart className="h-5 w-5" />
-            </button>
+            {artwork.available && (
+              <button
+                onClick={handleAddToCart}
+                className="bg-primary-500 hover:bg-primary-600 text-white p-3 rounded-full transition-all duration-200 transform hover:scale-110"
+              >
+                <ShoppingCart className="h-5 w-5" />
+              </button>
+            )}
           </div>
         </div>
 
         {/* Mobile/Tablet Cart Button */}
-        <button
-          onClick={handleAddToCart}
-          className="md:hidden absolute bottom-2 right-2 bg-primary-500 hover:bg-primary-600 text-white p-2 rounded-full transition-all duration-200 transform hover:scale-110"
-        >
-          <ShoppingCart className="h-4 w-4" />
-        </button>
+        {artwork.available && (
+          <button
+            onClick={handleAddToCart}
+            className="md:hidden absolute bottom-2 right-2 bg-primary-500 hover:bg-primary-600 text-white p-2 rounded-full transition-all duration-200 transform hover:scale-110"
+          >
+            <ShoppingCart className="h-4 w-4" />
+          </button>
+        )}
 
         {/* Price Badge */}
         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">

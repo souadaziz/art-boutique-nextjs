@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ShoppingCart, Heart, Share2, Minus, Plus } from 'lucide-react';
+import { ArrowLeft, ShoppingCart, Heart, Share2, Minus, Plus, Palette } from 'lucide-react';
 import { artworks } from '@/lib/data';
 import { useCart } from '@/lib/cart-context';
 import ArtworkCard from '@/components/ArtworkCard';
@@ -78,7 +78,8 @@ export default function ArtworkDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Image Carousel */}
           <ImageCarousel 
-            images={artwork.images} 
+            images={artwork.images}
+            cloudinaryIds={artwork.cloudinaryIds}
             title={artwork.title}
           />
 
@@ -97,7 +98,8 @@ export default function ArtworkDetailPage() {
               
               {!artwork.available && (
                 <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
-                  <p className="text-red-800 font-medium">Cette œuvre a été vendue</p>
+                  <p className="text-red-800 font-medium">Cette œuvre a été vendue.</p>
+                  <p className="text-red-800 font-medium">Chaque œuvre est unique. Si ce style vous a inspiré, nous serions ravis de créer une pièce sur mesure qui répond à vos attentes. Contactez-nous pour une commande personnalisée.</p>
                 </div>
               )}
             </div>
@@ -129,7 +131,7 @@ export default function ArtworkDetailPage() {
             </div>
 
             {/* Actions */}
-            {artwork.available && (
+            {artwork.available ? (
               <div className="mb-8">
                 <div className="flex items-center gap-4 mb-4">
                   <span className="text-sm font-medium text-gray-700">Quantité:</span>
@@ -159,6 +161,34 @@ export default function ArtworkDetailPage() {
                     <ShoppingCart className="h-5 w-5" />
                     Ajouter au panier
                   </button>
+                  <button
+                    onClick={() => setIsWishlisted(!isWishlisted)}
+                    className={`p-3 rounded-md border transition-colors duration-200 ${
+                      isWishlisted
+                        ? 'bg-red-50 border-red-200 text-red-600'
+                        : 'border-gray-300 text-gray-600 hover:bg-gray-50'
+                    }`}
+                  >
+                    <Heart className={`h-5 w-5 ${isWishlisted ? 'fill-current' : ''}`} />
+                  </button>
+                  <button
+                    onClick={handleShare}
+                    className="p-3 rounded-md border border-gray-300 text-gray-600 hover:bg-gray-50 transition-colors duration-200"
+                  >
+                    <Share2 className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="mb-8">
+                <div className="flex gap-4">
+                  <Link
+                    href="/art-sur-mesure"
+                    className="flex-1 bg-primary-600 text-white px-6 py-3 rounded-md font-medium hover:bg-primary-700 transition-colors duration-200 flex items-center justify-center gap-2"
+                  >
+                    <Palette className="h-5 w-5" />
+                    Commande personnalisée
+                  </Link>
                   <button
                     onClick={() => setIsWishlisted(!isWishlisted)}
                     className={`p-3 rounded-md border transition-colors duration-200 ${

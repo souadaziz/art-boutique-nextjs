@@ -1,15 +1,16 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import CloudinaryImage from '@/components/CloudinaryImage';
 
 interface ImageCarouselProps {
   images: string[];
+  cloudinaryIds?: string[];
   title: string;
 }
 
-export default function ImageCarousel({ images, title }: ImageCarouselProps) {
+export default function ImageCarousel({ images, cloudinaryIds, title }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
@@ -59,17 +60,18 @@ export default function ImageCarousel({ images, title }: ImageCarouselProps) {
     <div className="relative">
       {/* Image principale */}
       <div 
-        className="relative overflow-hidden rounded-2xl shadow-2xl max-h-[70vh] flex items-center justify-center bg-gray-50 touch-pan-y"
+        className="relative overflow-hidden rounded-2xl shadow-2xl aspect-square max-h-[80vh] flex items-center justify-center bg-gray-50 touch-pan-y"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <Image
-          src={images[currentIndex]}
+        <CloudinaryImage
+          publicId={cloudinaryIds?.[currentIndex] || ''}
           alt={`${title} - Image ${currentIndex + 1}`}
           width={800}
-          height={600}
-          className="max-w-full max-h-full object-contain select-none"
+          height={800}
+          className="w-full h-full object-contain select-none"
+          fallbackSrc={images[currentIndex]}
         />
         
         {/* Navigation arrows - seulement si plus d'une image */}
@@ -113,11 +115,13 @@ export default function ImageCarousel({ images, title }: ImageCarouselProps) {
                   : 'border-gray-200 hover:border-gray-300'
               }`}
             >
-              <Image
-                src={image}
+              <CloudinaryImage
+                publicId={cloudinaryIds?.[index] || ''}
                 alt={`${title} - Miniature ${index + 1}`}
-                fill
+                width={80}
+                height={80}
                 className="object-cover"
+                fallbackSrc={image}
               />
             </button>
           ))}
