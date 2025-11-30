@@ -29,9 +29,15 @@ export async function POST(request: NextRequest) {
       
       subject = `Nouvelle commande - ${total} MAD`;
       
-      const itemsList = items.map((item: any) => 
-        `<li>${item.artwork.title} (${item.quantity}x) - ${item.artwork.price * item.quantity} MAD</li>`
-      ).join('');
+      const cartItems = Array.isArray(items) ? items : [];
+      const itemsList = cartItems.map((ci: any) => {
+        const it = ci?.item ?? ci?.artwork ?? ci;
+        const title = it?.title ?? it?.name ?? 'Article';
+        const unitPrice = typeof it?.price === 'number' ? it.price : 0;
+        const qty = typeof ci?.quantity === 'number' ? ci.quantity : 1;
+        const lineTotal = unitPrice * qty;
+        return `<li>${title} (${qty}x) - ${lineTotal} MAD</li>`;
+      }).join('');
 
       htmlContent = `
         <h2>Nouvelle commande reçue</h2>
@@ -88,7 +94,9 @@ export async function POST(request: NextRequest) {
 
     // Envoyer l'email via Resend
     const { data, error } = await resend.emails.send({
-      from: 'Souad Aziz Art <contact@souadazizart.com>', // Domaine par défaut pour les tests
+      from: process.env.NODE_ENV === 'development'
+        ? 'Souad Aziz Art <onboarding@resend.dev>'
+        : 'Souad Aziz Art <contact@souadazizart.com>',
       to: [toEmail],
       subject: subject,
       html: htmlContent,

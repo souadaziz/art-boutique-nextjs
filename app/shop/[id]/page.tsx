@@ -2,28 +2,29 @@
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ShoppingCart, Heart, Share2, Minus, Plus, Palette } from 'lucide-react';
-import { artworks } from '@/lib/data';
+import { ArrowLeft, ShoppingCart, Heart, Share2, Minus, Plus, Package, ChevronDown, ChevronUp } from 'lucide-react';
+import { shopProducts } from '@/lib/data';
 import { useCart } from '@/lib/cart-context';
-import ArtworkCard from '@/components/ArtworkCard';
+import ProductCard from '@/components/ProductCard';
 import ImageCarousel from '@/components/ImageCarousel';
 
-export default function ArtworkDetailPage() {
+export default function ProductDetailPage() {
   const params = useParams();
   const router = useRouter();
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [isContentOpen, setIsContentOpen] = useState(false);
 
-  const artwork = artworks.find(art => art.id === params.id);
+  const product = shopProducts.find(prod => prod.id === params.id);
 
-  if (!artwork) {
+  if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Œuvre non trouvée</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Produit non trouvé</h1>
           <Link
-            href="/boutique"
+            href="/shop"
             className="text-primary-600 hover:text-primary-700 font-medium"
           >
             Retour à la boutique
@@ -33,24 +34,26 @@ export default function ArtworkDetailPage() {
     );
   }
 
-  // Get related artworks (same category, excluding current)
-  const relatedArtworks = artworks
-    .filter(art => art.category === artwork.category && art.id !== artwork.id)
+  // Get related products (same category, excluding current)
+  const relatedProducts = shopProducts
+    .filter(prod => prod.category === product.category && prod.id !== product.id)
     .slice(0, 3);
 
   const handleAddToCart = () => {
-    for (let i = 0; i < quantity; i++) {
-      addToCart(artwork);
+    if (product.stock > 0) {
+      for (let i = 0; i < quantity; i++) {
+        addToCart(product);
+      }
+      setQuantity(1);
     }
-    setQuantity(1);
   };
 
   const handleShare = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: artwork.title,
-          text: artwork.description,
+          title: product.name,
+          text: product.description,
           url: window.location.href,
         });
       } catch (err) {
@@ -62,6 +65,9 @@ export default function ArtworkDetailPage() {
       alert('Lien copié dans le presse-papiers !');
     }
   };
+
+  const isInStock = product.stock > 0;
+  const isLowStock = product.stock > 0 && product.stock < 5;
 
   return (
     <div className="min-h-screen bg-white">
@@ -76,62 +82,121 @@ export default function ArtworkDetailPage() {
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Image Carousel */}
+          {/* Product Image Carousel */}
           <ImageCarousel 
-            images={artwork.images}
-            cloudinaryIds={artwork.cloudinaryIds}
-            title={artwork.title}
+            images={product.images || [product.image]}
+            cloudinaryIds={product.cloudinaryIds}
+            title={product.name}
           />
 
           {/* Details */}
           <div className="flex flex-col">
             <div className="mb-6">
-              <span className="text-primary-600 font-medium text-sm uppercase tracking-wide">
-                {artwork.category}
-              </span>
-              <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mt-2 mb-4">
-                {artwork.title}
+              {/* Category - Masqué temporairement */}
+              {/* <span className="text-primary-600 font-medium text-sm uppercase tracking-wide">
+                {product.category}
+              </span> */}
+              {/* Product Brand - Masqué temporairement */}
+              {/* {product.brand && (
+                <span className="text-gray-400 text-sm ml-2">• {product.brand}</span>
+              )} */}
+              <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">
+                {product.name}
               </h1>
-              <p className={`hidden text-2xl font-semibold mb-4 ${artwork.available ? 'text-gray-900' : 'text-gray-500 line-through'}`}>
-                {artwork.price} MAD
+              <p className={`text-2xl font-semibold mb-4 ${isInStock ? 'text-gray-900' : 'text-gray-500'}`}>
+                {product.price} MAD
               </p>
+              {product.forWhom && (
+                <div className="mt-4 bg-primary-50 border border-primary-100 rounded-lg p-4">
+                  <p className="text-sm font-semibold text-primary-900 mb-1">Pour qui ?</p>
+                  <p className="text-primary-700">{product.forWhom}</p>
+                </div>
+              )}
               
-              {!artwork.available && (
+              {/* Stock Status */}
+              {!isInStock && (
                 <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
-                  <p className="text-red-800 font-medium">Cette œuvre a été vendue.</p>
-                  <p className="text-red-800 font-medium">Chaque œuvre est unique. Si ce style vous a inspiré, nous serions ravis de créer une pièce sur mesure qui répond à vos attentes. Contactez-nous pour une commande personnalisée.</p>
+                  <p className="text-red-800 font-medium">Ce produit est actuellement en rupture de stock.</p>
+                  <p className="text-red-600 text-sm mt-1">Contactez-nous pour connaître la disponibilité.</p>
+                </div>
+              )}
+              {isLowStock && (
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 mb-4">
+                  <p className="text-orange-800 font-medium">⚠️ Plus que {product.stock} en stock - Commandez vite !</p>
                 </div>
               )}
             </div>
 
             <div className="mb-8">
+               
+
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Description</h3>
-              <p className="text-gray-600 leading-relaxed">
-                {artwork.description}
-              </p>
+              <div 
+                className="text-gray-600 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: product.description }}
+              />
+              
             </div>
 
-            {/* Artwork Details */}
-            <div className="mb-8 space-y-3">
+            {/* Contenu de la box - Collapsible */}
+            {product.content && product.content.length > 0 && (
+              <div className="mb-8 border border-gray-200 rounded-lg">
+                <button
+                  onClick={() => setIsContentOpen(!isContentOpen)}
+                  className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors duration-200"
+                >
+                  <div className="flex items-center gap-3">
+                    <Package className="h-5 w-5 text-primary-600" />
+                    <span className="text-lg font-semibold text-gray-900">Contenu de la box</span>
+                  </div>
+                  {isContentOpen ? (
+                    <ChevronUp className="h-5 w-5 text-gray-500" />
+                  ) : (
+                    <ChevronDown className="h-5 w-5 text-gray-500" />
+                  )}
+                </button>
+                {isContentOpen && (
+                  <div className="px-4 pb-4">
+                    <ul className="space-y-2">
+                      {product.content.map((item, index) => (
+                        <li key={index} className="flex items-start gap-2 text-gray-600">
+                          <span className="text-primary-600 mt-1">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Product Details - Masqué temporairement */}
+            {/* <div className="mb-8 space-y-3">
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Détails</h3>
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="text-gray-500">Dimensions:</span>
-                  <p className="font-medium">{artwork.dimensions}</p>
+                  <span className="text-gray-500">Catégorie:</span>
+                  <p className="font-medium">{product.category}</p>
                 </div>
                 <div>
-                  <span className="text-gray-500">Technique:</span>
-                  <p className="font-medium">{artwork.technique}</p>
+                  <span className="text-gray-500">Stock disponible:</span>
+                  <p className="font-medium">{product.stock} unité{product.stock > 1 ? 's' : ''}</p>
                 </div>
+                {product.brand && (
+                  <div>
+                    <span className="text-gray-500">Marque:</span>
+                    <p className="font-medium">{product.brand}</p>
+                  </div>
+                )}
                 <div>
-                  <span className="text-gray-500">Artiste:</span>
-                  <p className="font-medium">{artwork.artist}</p>
+                  <span className="text-gray-500">Référence:</span>
+                  <p className="font-medium">{product.id.toUpperCase()}</p>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Actions */}
-            {artwork.available ? (
+            {isInStock ? (
               <div className="mb-8">
                 <div className="flex items-center gap-4 mb-4">
                   <span className="text-sm font-medium text-gray-700">Quantité:</span>
@@ -145,12 +210,16 @@ export default function ArtworkDetailPage() {
                     </button>
                     <span className="px-4 py-2 text-gray-900 font-medium">{quantity}</span>
                     <button
-                      onClick={() => setQuantity(quantity + 1)}
+                      onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
                       className="p-2 text-gray-500 hover:text-gray-700"
+                      disabled={quantity >= product.stock}
                     >
                       <Plus className="h-4 w-4" />
                     </button>
                   </div>
+                  {quantity >= product.stock && (
+                    <span className="text-sm text-orange-600">Stock maximum atteint</span>
+                  )}
                 </div>
 
                 <div className="flex gap-4">
@@ -183,11 +252,11 @@ export default function ArtworkDetailPage() {
               <div className="mb-8">
                 <div className="flex gap-4">
                   <Link
-                    href="/art-sur-mesure"
+                    href="/contact"
                     className="flex-1 bg-primary-600 text-white px-6 py-3 rounded-md font-medium hover:bg-primary-700 transition-colors duration-200 flex items-center justify-center gap-2"
                   >
-                    <Palette className="h-5 w-5" />
-                    Commande personnalisée
+                    <Package className="h-5 w-5" />
+                    Nous contacter
                   </Link>
                   <button
                     onClick={() => setIsWishlisted(!isWishlisted)}
@@ -211,22 +280,22 @@ export default function ArtworkDetailPage() {
 
             {/* Additional Info */}
             <div className="text-sm text-gray-500 space-y-2">
-              <p>✓ Livraison au Maroc: Gratuite</p>
-              <p>✓ Livraison Partout dans le monde: Contactez-nous </p>
-              <p>✓ Certificat d'authenticité inclus</p>
+              <p>✓ Livraison partout au Maroc</p>
+              <p>✓ Matériel de qualité</p>
+            
             </div>
           </div>
         </div>
 
-        {/* Related Artworks */}
-        {relatedArtworks.length > 0 && (
+        {/* Related Products */}
+        {relatedProducts.length > 0 && (
           <section className="mt-20">
             <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-8 text-center">
-              Œuvres Similaires
+              Produits Similaires
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {relatedArtworks.map((relatedArtwork) => (
-                <ArtworkCard key={relatedArtwork.id} artwork={relatedArtwork} />
+              {relatedProducts.map((relatedProduct) => (
+                <ProductCard key={relatedProduct.id} product={relatedProduct} />
               ))}
             </div>
           </section>

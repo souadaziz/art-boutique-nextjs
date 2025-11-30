@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 import { useCart } from '@/lib/cart-context';
 
@@ -14,6 +15,7 @@ export default function Header({ onCartClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isWritten, setIsWritten] = useState(false);
   const { itemCount } = useCart();
+  const pathname = usePathname();
 
   useEffect(() => {
     // Déclencher l'animation après un court délai
@@ -28,6 +30,7 @@ export default function Header({ onCartClick }: HeaderProps) {
     { name: 'Galerie', href: '/boutique' },
     { name: 'Art sur mesure', href: '/art-sur-mesure' },
     { name: 'Workshop', href: '/workshop' },
+    { name: 'Shop', href: '/shop' },
     { name: 'À Propos', href: '/a-propos' },
     { name: 'Contact', href: '/contact' },
   ];
@@ -83,15 +86,22 @@ export default function Header({ onCartClick }: HeaderProps) {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`px-3 py-2 text-sm font-medium transition-all duration-200 ${
+                    isActive
+                      ? 'text-primary-600 font-semibold border-b-2 border-primary-600'
+                      : 'text-gray-400 hover:text-primary-600 hover:scale-105'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Cart and Mobile Menu */}
@@ -123,16 +133,23 @@ export default function Header({ onCartClick }: HeaderProps) {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md transition-colors duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navigation.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`block px-3 py-2 text-base font-medium rounded-md transition-all duration-200 ${
+                      isActive
+                        ? 'text-primary-600 bg-primary-50 font-semibold'
+                        : 'text-gray-400 hover:text-primary-600 hover:bg-gray-50'
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         )}

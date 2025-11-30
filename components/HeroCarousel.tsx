@@ -12,7 +12,7 @@ export default function HeroCarousel() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
+    }, 12000);
 
     return () => clearInterval(timer);
   }, []);
@@ -33,7 +33,7 @@ export default function HeroCarousel() {
     <div className="relative h-screen overflow-hidden">
       {/* Images */}
       <div className="relative h-full">
-        {heroImages.map((image, index) => (
+        {heroImages.map((slide, index) => (
           <div
             key={index}
             className={`absolute inset-0 transition-opacity duration-1000 ${
@@ -41,8 +41,8 @@ export default function HeroCarousel() {
             }`}
           >
             <Image
-              src={image}
-              alt={`Œuvre d'art ${index + 1}`}
+              src={slide.image}
+              alt={slide.title}
               fill
               className="object-cover"
               priority={index === 0}
@@ -56,27 +56,40 @@ export default function HeroCarousel() {
 
       {/* Content */}
       <div className="absolute inset-0 flex items-center justify-center text-center text-white z-10">
-        <div className="max-w-4xl px-4">
-          <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
-            Art & Passion
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto">
-            Découvrez une collection unique d'œuvres d'art originales créées avec passion et inspiration
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/boutique"
-              className="inline-flex items-center justify-center px-8 py-4 bg-primary-600 text-white text-lg font-medium rounded-md hover:bg-primary-700 transition-colors duration-200"
+        <div className="max-w-4xl px-4 relative">
+          {heroImages.map((slide, index) => (
+            <div
+              key={index}
+              className={`transition-opacity duration-700 ${
+                index === currentSlide 
+                  ? 'opacity-100 relative z-10' 
+                  : 'opacity-0 absolute inset-0 pointer-events-none z-0'
+              }`}
             >
-              Découvrir la Collection
-            </Link>
-            <Link
-              href="/a-propos"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white/10 border border-white/30 text-white text-lg font-medium rounded-md hover:bg-white/20 transition-colors duration-200"
-            >
-              En Savoir Plus
-            </Link>
-          </div>
+              <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+                {slide.title}
+              </h1>
+              <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto whitespace-pre-line">
+                {slide.description}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                {index === 0 && (
+                  <Link
+                    href={slide.primaryButton.link}
+                    className="inline-flex items-center justify-center px-8 py-4 bg-primary-600 text-white text-lg font-medium rounded-md hover:bg-primary-700 hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+                  >
+                    {slide.primaryButton.text}
+                  </Link>
+                )}
+                <Link
+                  href={slide.secondaryButton.link}
+                  className="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white text-lg font-medium rounded-md hover:bg-white/20 hover:border-white/50 hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+                >
+                  {slide.secondaryButton.text}
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

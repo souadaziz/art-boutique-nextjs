@@ -1,4 +1,4 @@
-import { Artwork } from '@/types';
+import { Artwork, ShopProduct } from '@/types';
 
 export const artworks: Artwork[] = [
   {
@@ -397,12 +397,17 @@ export const artworks: Artwork[] = [
     title: 'Miroir des Eaux',
     artist: 'Souad Aziz',
     price: 1000,
-    image: '/images/artworks/IMG-20250825-WA0002.jpg',
-    cloudinaryId: 'IMG-20250825-WA0002',
+    image: '/images/artworks/MiroirdesEaux.jpg',
+    cloudinaryId: 'MiroirdesEaux',
     images: [
-      '/images/artworks/IMG-20250825-WA0002.jpg'
+      '/images/artworks/MiroirdesEaux.jpg',
+      '/images/artworks/MiroirdesEaux-2.jpg',
+      '/images/artworks/MiroirdesEaux-3.jpg',
+      '/images/artworks/MiroirdesEaux-4.jpg',
+      '/images/artworks/MiroirdesEaux-5.jpg'
+
     ],
-    cloudinaryIds: ['IMG-20250825-WA0002'],
+    cloudinaryIds: ['MiroirdesEaux', 'MiroirdesEaux-2', 'MiroirdesEaux-3', 'MiroirdesEaux-4', 'MiroirdesEaux-5'],
     description: 'Excellent mélange de couleur mouvementé, en le méditant, on voyage dans nos profondeurs.',
     category: 'Abstrait',
     dimensions: ' Cerculaire 60 cm',
@@ -416,7 +421,7 @@ export const artworks: Artwork[] = [
     artist: 'Souad Aziz',
     price: 3360,
     image: '/images/artworks/tierramar.jpg',
-    cloudinaryId: 'tierra-mar',
+    cloudinaryId: 'tierramar',
     images: [
       '/images/artworks/tierramar.jpg',
       '/images/artworks/tierramar-2.jpg',
@@ -585,6 +590,68 @@ export const artworks: Artwork[] = [
     technique: 'Technique mixte sur toile',
     available: false,
     year: 2022,
+  },
+  {
+    id: '31',
+    title: 'Ambre',
+    artist: 'Souad Aziz',
+    price: 4900,
+    image: '/images/artworks/ambre.jpg',
+    cloudinaryId: 'ambre',
+    images: [
+      '/images/artworks/ambre.jpg',
+      '/images/artworks/ambre-2.jpg',
+      '/images/artworks/ambre-3.jpg'
+    ],
+    cloudinaryIds: ['ambre', 'ambre-2', 'ambre-3'],
+    description: 'Ce tableau est le quatrième de la série « WOOD FRAGRANCE », le mélange de couleur et leur mouvement nous emmène dans un voyage boisé.',
+    category: 'Abstrait',
+    dimensions: ' 140 x 100 cm',
+    technique: 'Technique mixte sur toile',
+    available: false,
+    year: 2025,
+  },
+  {
+    id: '32',
+    title: 'Echo',
+    artist: 'Souad Aziz',
+    price: 2800,
+    image: '/images/artworks/echo.jpg',
+    cloudinaryId: 'echo',
+    images: [
+      '/images/artworks/echo.jpg',
+      '/images/artworks/echo-2.jpg',
+      '/images/artworks/echo-3.jpg',
+      '/images/artworks/echo-4.jpg'
+    ],
+    cloudinaryIds: ['echo', 'echo-2', 'echo-3', 'echo-4'],
+    description: 'Ce tableau évoque l\'échange profond, l\'effet miroir et les mouvements quotidiens entre les composantes de la vie.',
+    category: 'Abstrait',
+    dimensions: ' Diptyque 70 x 50 cm',
+    technique: 'Technique mixte sur toile',
+    available: false,
+    year: 2025,
+  },
+  {
+    id: '33',
+    title: 'Révélation',
+    artist: 'Souad Aziz',
+    price: 2800,
+    image: '/images/artworks/revelation.jpg',
+    cloudinaryId: 'revelation',
+    images: [
+      '/images/artworks/revelation.jpg',
+      '/images/artworks/revelation-2.jpg',
+      '/images/artworks/revelation-3.jpg',
+      '/images/artworks/revelation-4.jpg'
+    ],
+    cloudinaryIds: ['revelation', 'revelation-2', 'revelation-3', 'revelation-4'],
+    description: 'Ce tableau mouvementé, par les couleurs et les textures montre la beauté dans la complexité de la vie',
+    category: 'Abstrait',
+    dimensions: ' Diptyque 70 x 50 cm',
+    technique: 'Technique mixte sur toile',
+    available: false,
+    year: 2025,
   }
 ];
 
@@ -599,7 +666,210 @@ export const categories = [
 ];
 
 export const heroImages = [
-  '/images/hero.jpg',
-  '/images/hero-2.jpg',
-  '/images/hero-3.jpg',
+  {
+    image: '/images/hero.jpg',
+    title: 'Art & Passion',
+    description: 'Explorez notre Galerie et plongez dans une collection unique de Tableaux originaux signés Souad AZIZ. \nVous avez une vision particulière ? Commandez votre œuvre Sur-Mesure pour une création parfaitement adaptée à votre espace',
+    primaryButton: {
+      text: 'Découvrir la Collection',
+      link: '/boutique'
+    },
+    secondaryButton: {
+      text: 'En Savoir Plus',
+      link: '/a-propos'
+    }
+  },
+  {
+    image: '/images/hero-2.jpg',
+    title: 'Art & Passion',
+    description: 'Développez votre talent créatif en rejoignant nos Workshops spécialisés',
+    primaryButton: {
+      text: 'Voir les Œuvres',
+      link: '/boutique'
+    },
+    secondaryButton: {
+      text: 'En Savoir Plus',
+      link: '/workshop'
+    }
+  },
+  {
+    image: '/images/hero-3.jpg',
+    title: 'Art & Passion',
+    description: 'Pour une expérience artistique à domicile, ou pour une idée cadeau originale: \nVisitez le Shop et procurez-vous l\'Artbox, l\'outil complet pour donner vie à vos propres inspirations',
+    primaryButton: {
+      text: 'Explorer la Galerie',
+      link: '/boutique'
+    },
+    secondaryButton: {
+      text: 'En Savoir Plus',
+      link: '/shop'
+    }
+  },
+];
+
+export const shopProducts: ShopProduct[] = [
+  {
+    id: 'p1',
+    name: 'Art Box Fun',
+    price: 119,
+    image: '/images/shop/Fun.jpg',
+    images: [
+      '/images/shop/Fun.jpg',
+      '/images/shop/Fun-2.jpg',
+      '/images/shop/Fun-3.jpg',
+      '/images/shop/Fun-4.jpg',
+      '/images/shop/Fun-5.jpg',
+      '/images/shop/Fun-6.jpg',
+      '/images/shop/Fun-7.jpg',
+      '/images/shop/Fun-8.jpg'
+    ],
+    cloudinaryId: 'Fun.jpg',
+    cloudinaryIds: [
+      'Fun.jpg',
+      'Fun-2.jpg',
+      'Fun-3.jpg',
+      'Fun-4.jpg',
+      'Fun-5.jpg',
+      'Fun-6.jpg',
+      'Fun-7.jpg',
+      'Fun-8.jpg'
+    ],
+    description: 'C\'est ici que l\'aventure commence ! L\'Art Box Fun est la porte d\'entrée de notre Lab Création, conçue pour un maximum de plaisir.<br>Ce kit est parfait pour découvrir la magie de la couleur. Ouvrez la box et trouvez une collection de figurines en plâtre prêtes à être transformées en œuvres d\'art colorées, accompagnées de tout le Kit Peinture essentiel. <br><br> <strong> Option cadeau disponible </strong> : Ajoutez l\'emballage cadeau à votre commande pour offrir ce moment de créativité et de fun !',
+    forWhom: 'Les enfants, les mini-créateurs et les esprits qui veulent s\'amuser.',
+    content: [
+      'Figurines en plâtre',
+      'Pots de peinture acrylique (6 couleurs)',
+      '2 Pinceaux',
+      '1 Palette',
+      '1 Guide de mélange des couleurs',
+      '1 Coloriage',
+      'Gift: Surprise offerte'
+    ],
+    category: 'Art Box',
+    stock: 15,
+    brand: ' ',
+    itemType: 'product'
+  },
+  {
+    id: 'p2',
+    name: 'Art Box Starter',
+    price: 149,
+    image: '/images/shop/Starter.jpg',
+    images: [
+      '/images/shop/Starter.jpg',
+      '/images/shop/Starter-2.jpg',
+      '/images/shop/Starter-3.jpg'
+    ],
+    cloudinaryId: 'Starter.jpg',
+    cloudinaryIds: [
+      'Starter.jpg',
+      'Starter-2.jpg',
+      'Starter-3.jpg'
+    ],
+    description: 'Prêt à monter votre premier atelier ? L\'Art Box Starter est notre formule test pour vous lancer dans la peinture sur toile ! <br>Ce kit tout-en-un contient une mini-toile sur chevalet (parfaite pour commencer sans pression), et bien sûr, un Kit Peinture complet et de qualité pour vos premières manipulations. Nous vous donnons tous les outils pour passer du simple rêve à la réalisation d\'une œuvre dont vous serez fier. <br><br> <strong> Option cadeau disponible </strong> : un cadeau inspirant ! Pensez à l\'emballage cadeau pour surprendre un proche qui rêve de se mettre à la peinture.',
+    forWhom: 'Les débutants, les curieux et ceux qui veulent s\'initier sérieusement à la peinture sur toile.',
+    content: [
+      '1 Canevas (10 x 10 cm) avec Chevalet',
+      'Pots de peinture acrylique (6 couleurs)',
+      '2 Pinceaux',
+      '1 Palette',
+      '1 Guide de mélange des couleurs',
+      'Cartes d\'inspirations',
+      'Gift: Surprise offerte'
+    ],
+    category: 'Art Box',
+    stock: 8,
+    brand: ' ',
+    itemType: 'product'
+  },
+  {
+    id: 'p3',
+    name: 'Art Box Pro ',
+    price: 219,
+    image: '/images/shop/ArtPro.jpg',
+    images: [
+      '/images/shop/ArtPro.jpg',
+      '/images/shop/ArtPro-2.jpg',
+      '/images/shop/ArtPro-3.jpg',
+      '/images/shop/ArtPro-4.jpg'
+      
+    ],
+    cloudinaryId: 'ArtPro',
+    cloudinaryIds: [
+      'ArtPro',
+      'ArtPro-2',
+      'ArtPro-3',
+      'ArtPro-4'
+    ],
+    description: 'Passez au niveau supérieur dans Le Lab Création ! L\'Art Box Pro est destinée à ceux qui sont prêts à affiner leur technique et à expérimenter avec des outils plus spécialisés. <br>Dans cette boîte, vous trouverez du matériel de peinture de qualité professionnelle (meilleurs pigments, pinceaux plus précis, supports plus grands…) . Cette Art Box vous ouvre les portes de l\'expérimentation avancée. <br><br> <strong> Option cadeau disponible </strong> : Le cadeau parfait pour l\'artiste passionné ! Pensez à l\'emballage cadeau lors de la commande.',
+    forWhom: 'Les artistes en herbe, les créateurs passionnés et ceux qui recherchent un matériel de haute qualité.',
+    content: [
+      '2 Toiles professionnelles Le Franc Bourgeois (20 x 20 cm)',
+      'Pots de peinture Acrylique Mont Martre (12 couleurs)',
+      '2 Pinceaux professionnels',
+      '1 Palette',
+      '1 Guide de mélange des couleurs',
+      'Gift: Surprise offerte'
+    ],
+    category: 'Art Box',
+    stock: 14,
+    brand: ' ',
+    itemType: 'product'
+  }
+];
+
+export const shopCategories = [
+  'Tous',
+  'Pinceaux',
+  'Toiles',
+  'Peintures',
+  'Médiums',
+  'Accessoires',
+  'Chevalets',
+  'Vernis',
+  'Papiers'
+];
+
+export const workshopHeroImages = [
+  {
+    image: '/images/workshop/workshop.jpg',
+    alt: 'Formation peinture en ligne'
+  },
+  {
+    image: '/images/workshop/workshop-2.jpg',
+    alt: 'Atelier créatif peinture'
+  },
+  {
+    image: '/images/workshop/workshop-3.jpg',
+    alt: 'Cours de peinture intuitive'
+  },
+  {
+    image: '/images/workshop/workshop-4.jpeg',
+    alt: 'Cours de peinture intuitive'
+  },
+  {
+    image: '/images/workshop/workshop-5.jpg',
+    alt: 'Cours de peinture intuitive'
+  },
+  {
+    image: '/images/workshop/workshop-6.jpg',
+    alt: 'Cours de peinture intuitive'
+  },
+  {
+    image: '/images/workshop/workshop-7.jpg',
+    alt: 'Cours de peinture intuitive'
+  },
+  {
+    image: '/images/workshop/workshop-8.jpg',
+    alt: 'Cours de peinture intuitive'
+  },
+  {
+    image: '/images/workshop/workshop-9.jpeg',
+    alt: 'Cours de peinture intuitive'
+  },
+  {
+    image: '/images/workshop/workshop-10.jpeg',
+    alt: 'Cours de peinture intuitive'
+  }
+
 ];

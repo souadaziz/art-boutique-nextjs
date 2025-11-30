@@ -7,10 +7,16 @@ import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 import Image from 'next/image';
 import CloudinaryImage from '@/components/CloudinaryImage';
+import { Artwork, ShopProduct } from '@/types';
 
 interface CartProps {
   isOpen: boolean;
   onClose: () => void;
+}
+
+// Helper function to check if item is an Artwork
+function isArtwork(item: Artwork | ShopProduct): item is Artwork {
+  return 'title' in item;
 }
 
 export default function Cart({ isOpen, onClose }: CartProps) {
@@ -76,59 +82,68 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                             </div>
                           ) : (
                             <ul role="list" className="-my-6 divide-y divide-gray-200">
-                              {items.map((item) => (
-                                <li key={item.artwork.id} className="flex py-6">
-                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                    <CloudinaryImage
-                                      publicId={item.artwork.cloudinaryId || ''}
-                                      alt={item.artwork.title}
-                                      width={96}
-                                      height={96}
-                                      className="h-full w-full object-cover object-center"
-                                      fallbackSrc={item.artwork.image}
-                                    />
-                                  </div>
-
-                                  <div className="ml-4 flex flex-1 flex-col">
-                                    <div>
-                                      <div className="flex justify-between text-base font-medium text-gray-900">
-                                        <h3>{item.artwork.title}</h3>
-                                        <p className="ml-4">{item.artwork.price} MAD</p>
-                                      </div>
-                                      <p className="mt-1 text-sm text-gray-500">{item.artwork.category}</p>
-                                      <p className="mt-1 text-xs text-gray-400">{item.artwork.dimensions}</p>
+                              {items.map((cartItem) => {
+                                const itemData = cartItem.item;
+                                const artwork = isArtwork(itemData);
+                                
+                                return (
+                                  <li key={itemData.id} className="flex py-6">
+                                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                      <CloudinaryImage
+                                        publicId={itemData.cloudinaryId || ''}
+                                        alt={artwork ? itemData.title : itemData.name}
+                                        width={96}
+                                        height={96}
+                                        className="h-full w-full object-cover object-center"
+                                        fallbackSrc={itemData.image}
+                                      />
                                     </div>
-                                    <div className="flex flex-1 items-end justify-between text-sm">
-                                      <div className="flex items-center space-x-2">
-                                        <button
-                                          onClick={() => updateQuantity(item.artwork.id, Math.max(0, item.quantity - 1))}
-                                          className="p-1 text-gray-400 hover:text-gray-600"
-                                          disabled={item.quantity <= 1}
-                                        >
-                                          <Minus className="h-4 w-4" />
-                                        </button>
-                                        <span className="text-gray-500">Qté {item.quantity}</span>
-                                        <button
-                                          onClick={() => updateQuantity(item.artwork.id, item.quantity + 1)}
-                                          className="p-1 text-gray-400 hover:text-gray-600"
-                                        >
-                                          <Plus className="h-4 w-4" />
-                                        </button>
-                                      </div>
 
-                                      <div className="flex">
-                                        <button
-                                          type="button"
-                                          onClick={() => removeFromCart(item.artwork.id)}
-                                          className="font-medium text-primary-600 hover:text-primary-500"
-                                        >
-                                          Supprimer
-                                        </button>
+                                    <div className="ml-4 flex flex-1 flex-col">
+                                      <div>
+                                        <div className="flex justify-between text-base font-medium text-gray-900">
+                                          <h3>{artwork ? itemData.title : itemData.name}</h3>
+                                          <p className="ml-4 hidden">{itemData.price} MAD</p>
+                                        </div>
+                                        <p className="mt-1 text-sm text-gray-500">{itemData.category}</p>
+                                        {artwork ? (
+                                          <p className="mt-1 text-xs text-gray-400">{itemData.dimensions}</p>
+                                        ) : (
+                                          itemData.brand && <p className="mt-1 text-xs text-gray-400">{itemData.brand}</p>
+                                        )}
+                                      </div>
+                                      <div className="flex flex-1 items-end justify-between text-sm">
+                                        <div className="flex items-center space-x-2">
+                                          <button
+                                            onClick={() => updateQuantity(itemData.id, Math.max(0, cartItem.quantity - 1))}
+                                            className="p-1 text-gray-400 hover:text-gray-600"
+                                            disabled={cartItem.quantity <= 1}
+                                          >
+                                            <Minus className="h-4 w-4" />
+                                          </button>
+                                          <span className="text-gray-500">Qté {cartItem.quantity}</span>
+                                          <button
+                                            onClick={() => updateQuantity(itemData.id, cartItem.quantity + 1)}
+                                            className="p-1 text-gray-400 hover:text-gray-600"
+                                          >
+                                            <Plus className="h-4 w-4" />
+                                          </button>
+                                        </div>
+
+                                        <div className="flex">
+                                          <button
+                                            type="button"
+                                            onClick={() => removeFromCart(itemData.id)}
+                                            className="font-medium text-primary-600 hover:text-primary-500"
+                                          >
+                                            Supprimer
+                                          </button>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                </li>
-                              ))}
+                                  </li>
+                                );
+                              })}
                             </ul>
                           )}
                         </div>
@@ -137,7 +152,7 @@ export default function Cart({ isOpen, onClose }: CartProps) {
 
                     {items.length > 0 && (
                       <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                        <div className="flex justify-between text-base font-medium text-gray-900">
+                        <div className="flex justify-between text-base font-medium text-gray-900 hidden">
                           <p>Total</p>
                           <p>{total} MAD</p>
                         </div>

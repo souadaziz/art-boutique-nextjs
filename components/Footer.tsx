@@ -17,7 +17,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://www.instagram.com/so_abstract_by_souad_aziz?igsh=ZWFyM2w2ZzJoYjBo" 
+                href="https://www.instagram.com/souad_aziz_art?igsh=ZWFyM2w2ZzJoYjBo " 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-primary-400 transition-colors duration-200"
@@ -59,6 +59,11 @@ export default function Footer() {
               <li>
                 <Link href="/workshop" className="text-gray-300 hover:text-white transition-colors duration-200">
                   Workshop
+                </Link>
+              </li>
+              <li>
+                <Link href="/shop" className="text-gray-300 hover:text-white transition-colors duration-200">
+                  Shop
                 </Link>
               </li>
               <li>

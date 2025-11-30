@@ -377,11 +377,12 @@ export default function ContactPage() {
                   >
                     <option value="">Sélectionnez un sujet</option>
                     <option value="information">Demande d'informations</option>
-                    <option value="achat">Achat d'un tableau</option>
                     <option value="commande p">Commande personnalisée</option>
                     <option value="artiste">Collaboration</option>
                     <option value="coaching">Coaching privé</option>
                     <option value="formation">Formation débutant</option>
+                    <option value="arttea">Art-Tea Session</option>
+                    <option value="workshop">Les Petites Mains</option>
                     <option value="autre">Autres</option>
                   </select>
                 </div>

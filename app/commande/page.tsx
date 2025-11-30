@@ -5,6 +5,12 @@ import { useCart } from '@/lib/cart-context';
 import Image from 'next/image';
 import CloudinaryImage from '@/components/CloudinaryImage';
 import { CheckCircle, ArrowLeft, AlertCircle } from 'lucide-react';
+import { Artwork, ShopProduct } from '@/types';
+
+// Helper function to check if item is an Artwork
+function isArtwork(item: Artwork | ShopProduct): item is Artwork {
+  return 'title' in item;
+}
 
 export default function CommandePage() {
   const { items, total, clearCart } = useCart();
@@ -426,45 +432,43 @@ export default function CommandePage() {
           {/* Résumé de la commande */}
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-6">Résumé de la commande</h2>
-            
             <div className="space-y-4">
-              {items.map((item) => (
-                <div key={item.artwork.id} className="flex items-center space-x-4">
-                  <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                    <CloudinaryImage
-                      publicId={item.artwork.cloudinaryId || ''}
-                      alt={item.artwork.title}
-                      width={64}
-                      height={64}
-                      className="h-full w-full object-cover object-center"
-                      fallbackSrc={item.artwork.image}
-                    />
+              {items.map((cartItem) => {
+                const itemData = cartItem.item;
+                const artwork = isArtwork(itemData);
+                return (
+                  <div key={itemData.id} className="flex items-center space-x-4">
+                    <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                      <CloudinaryImage
+                        publicId={itemData.cloudinaryId || ''}
+                        alt={artwork ? itemData.title : itemData.name}
+                        width={64}
+                        height={64}
+                        className="h-full w-full object-cover object-center"
+                        fallbackSrc={itemData.image}
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-sm font-medium text-gray-900">
+                        {artwork ? itemData.title : itemData.name}
+                      </h3>
+                      <p className="text-sm text-gray-500">Quantité: {cartItem.quantity}</p>
+                    </div>
+                    <div className="text-sm font-medium text-gray-900 hidden">
+                      {itemData.price * cartItem.quantity} MAD
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-sm font-medium text-gray-900">{item.artwork.title}</h3>
-                    <p className="text-sm text-gray-500">Quantité: {item.quantity}</p>
-                  </div>
-                  <div className="text-sm font-medium text-gray-900">
-                    {item.artwork.price * item.quantity} MAD
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
-
             <div className="border-t border-gray-200 mt-6 pt-6">
-              <div className="flex justify-between text-base font-medium text-gray-900">
+              <div className="flex justify-between text-base font-medium text-gray-900 hidden">
                 <p>Total</p>
                 <p>{total} MAD</p>
               </div>
               <p className="mt-0.5 text-sm text-gray-500">
                 Frais de livraison à confirmer selon la destination.
               </p>
-            </div>
-
-            <div className="mt-6 text-sm text-gray-500 space-y-2">
-              <p>✓ Livraison au Maroc: Gratuite</p>
-              <p>✓ Livraison Partout dans le monde: Contactez-nous</p>
-              <p>✓ Certificat d'authenticité inclus</p>
             </div>
           </div>
         </div>

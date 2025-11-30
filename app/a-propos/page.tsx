@@ -28,11 +28,30 @@ export default function AboutPage() {
       rating: 5
     },
     {
-      name: "Youssef Alami",
-      role: "Étudiant formation",
-      content: "Les formations en ligne sont excellentes. J'ai appris énormément et je continue à progresser grâce aux conseils de Souad.",
+      name: "Lucile",
+      role: "Participant Workshop",
+      content: "J'ai passé un super moment avec Souad, non seulement j'ai appris plein de choses sur le zellige (mosaique marocaine), mais aussi sur les associations de couleurs, et je suis très fière de la peinture que j'ai faite. J'ai trouvé l'experience très relaxante, j'en suis sortie très zen et ravie! Un grand merci.",
+      rating: 5
+    },
+    {
+      name: "Pierryl",
+      role: "Participant Workshop",
+      content: "Souad et sa famille ont été très accueillants, et l'activité peinture de zellige était très bien organisée. Souad est très drôle et explique très bien. Il y avait aussi une activité pour notre fille de trois ans. Je recommande !",
+      rating: 5
+    },
+    {
+      name: "Amina KHECHNI",
+      role: "Commande personnalisée, Essaouira",
+      content: "Le mélange des couleurs et le thème spirituel donnent une bonne vibration à mon salon, ton tableau m' inspire l'amour et l'unicité.Fière de toi, je te souhaite une très bonne continuation",
+      rating: 5
+    },
+    {
+      name: "Hervé",
+      role: "Participant Workshop",
+      content: "C'était vraiment un moment de grandes découvertes pour moi. Non seulement j'ai appris sur les combinaisons de couleurs mais je me suis aussi découvert une âme d'artiste. Merci beaucoup pour ce super tea-art break. C'était formidable.",
       rating: 5
     }
+  
   ];
 
   const nextTestimonial = () => {
@@ -51,14 +70,23 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-6">
-                A propos
+              À propos
               </h1>
               <p className="text-1xl text-gray-600 mb-8 leading-relaxed">
               Souad Aziz est née au cœur des montagnes du Moyen Atlas au Maroc, connues par leur beauté naturelle et leur richesse culturelle, ce qui lui a permis, de façon innée, d'avoir un lien fort avec la nature et ses composantes dans son contexte artistique, émotionnel et spirituel.
               </p>
               <p className="text-1xl text-gray-600 mb-8 leading-relaxed">
-              Malgré son cursus scolaire scientifique Intense finissant par un parcours professionnel en Ingénierie, elle a su garder ce lien profond avec la nature. Après la pandémie, elle a repris contact avec sa passion d'enfance lui permettant de s'exprimer, créer et de partager avec vous son art et son expérience artistique.
+              Malgré son cursus académique scientifique Intense finissant par un parcours professionnel en Ingénierie, elle a su garder ce lien profond avec la nature. Après la pandémie, elle a repris contact avec sa passion d'enfance lui permettant de s'exprimer, créer et de partager avec vous son art et son expérience artistique.
               </p>
+
+             <h2 className="text-2xl md:text-2xl font-display font-bold text-gray-900 mb-6">
+                L'Art qui Inspire
+              </h2>
+              <p className="text-1xl text-gray-600 mb-8 leading-relaxed">
+              Mon art représente la connexion profonde avec les éléments de la nature, où se rencontrent la matière, la lumière et les mouvements pour créer un sens, une émotion. <br></br>Chaque œuvre vous invite à expérimenter un moment de connexion, et apporte la sérénité et la chaleur à votre Intérieur.
+              </p>
+              
+
               <Link
                 href="/boutique"
                 className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700 transition-colors duration-200"

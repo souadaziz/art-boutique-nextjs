@@ -19,12 +19,14 @@ export function getCloudinaryUrl(
 
   const baseUrl = `https://res.cloudinary.com/${cloudName}/image/upload`;
   
+  let url = '';
   if (transformations) {
-    return `${baseUrl}/${transformations}/${publicId}`;
+    url = `${baseUrl}/${transformations}/${publicId}`;
+  } else {
+    // Sans transformations pour préserver la qualité originale
+    url = `${baseUrl}/${publicId}`;
   }
-  
-  // Sans transformations pour préserver la qualité originale
-  return `${baseUrl}/${publicId}`;
+  return url;
 }
 
 /**
@@ -79,10 +81,6 @@ export function getPerformanceOptimizedUrl(
     transformations.push(`h_${height}`);
   }
   
-  // Optimisations invisibles pour les performances :
-  // - f_auto : Format automatique (WebP pour navigateurs compatibles, sinon JPEG)
-  // - q_auto:good : Qualité automatique optimisée (préserve la qualité visuelle)
-  // - dpr_auto : Adaptation automatique à la densité de pixels de l'écran
   transformations.push('f_auto', 'q_auto:good', 'dpr_auto');
   
   return getCloudinaryUrl(publicId, transformations.join(','));
